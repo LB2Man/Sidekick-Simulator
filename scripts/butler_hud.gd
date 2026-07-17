@@ -319,10 +319,10 @@ func _build_task_panel() -> void:
 	_task_panel = PanelContainer.new()
 	_task_panel.name = "TaskPanel"
 	_task_panel.offset_left = 18.0
-	_task_panel.offset_top = 94.0
+	_task_panel.offset_top = 18.0
 	_task_panel.offset_right = 390.0
-	_task_panel.anchor_bottom = 1.0
-	_task_panel.offset_bottom = -82.0
+	_task_panel.anchor_bottom = 0.0
+	_task_panel.offset_bottom = 470.0
 	_task_panel.add_theme_stylebox_override("panel", _panel_style(PANEL, Color("395563"), 2, 11))
 	_root.add_child(_task_panel)
 	var margin := MarginContainer.new()
@@ -381,9 +381,9 @@ func _set_task_panel_expanded(expanded: bool) -> void:
 	_task_toggle_button.text = "[T]  –" if expanded else "[T]  +"
 	_task_toggle_button.tooltip_text = "Minimize today's service panel" if expanded else "Expand today's service panel"
 	if expanded:
-		_task_panel.anchor_bottom = 1.0
+		_task_panel.anchor_bottom = 0.0
 		_task_panel.offset_right = 390.0
-		_task_panel.offset_bottom = -82.0
+		_task_panel.offset_bottom = 470.0
 		_task_heading.text = "TODAY'S SERVICE"
 	else:
 		_task_panel.anchor_bottom = 0.0
@@ -398,8 +398,8 @@ func _build_minimap() -> void:
 	holder.anchor_right = 1.0
 	holder.offset_left = -292.0
 	holder.offset_right = -18.0
-	holder.offset_top = 94.0
-	holder.offset_bottom = 294.0
+	holder.offset_top = 18.0
+	holder.offset_bottom = 218.0
 	holder.add_theme_stylebox_override("panel", _panel_style(Color("081017e6"), Color("395563"), 1, 10))
 	_root.add_child(holder)
 	var margin := MarginContainer.new()
