@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bg" x1="18" y1="8" x2="112" y2="122" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#183342"/>
+      <stop offset="1" stop-color="#090f19"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="42" y1="80" x2="88" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE39A"/>
+      <stop offset="1" stop-color="#D99B36"/>
+    </linearGradient>
+  </defs>
+  <rect x="3" y="3" width="122" height="122" rx="25" fill="url(#bg)" stroke="#D7A84C" stroke-width="6"/>
+  <path d="M27 45 17 26l27 9M101 45l10-19-27 9" fill="#617480" stroke="#0A111A" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M23 55c4-25 25-37 41-37s37 12 41 37c5 30-14 47-41 47S18 85 23 55Z" fill="#71838C" stroke="#0A111A" stroke-width="5"/>
+  <path d="M25 54c12-13 23-17 39-11 16-6 27-2 39 11-6 24-23 30-39 23-16 7-33 1-39-23Z" fill="#121B25"/>
+  <ellipse cx="45" cy="59" rx="8" ry="6" fill="#6CE9EF"/>
+  <ellipse cx="83" cy="59" rx="8" ry="6" fill="#6CE9EF"/>
+  <path d="M57 75c2-5 12-5 14 0-1 7-13 7-14 0Z" fill="#090D13"/>
+  <path d="M52 91 35 84v23l17-7m24-9 17-7v23l-17-7Z" fill="url(#gold)" stroke="#9A6A27" stroke-width="3" stroke-linejoin="round"/>
+  <rect x="52" y="88" width="24" height="16" rx="5" fill="#F2C861" stroke="#9A6A27" stroke-width="3"/>
+  <circle cx="64" cy="96" r="3" fill="#183342"/>
+</svg>
