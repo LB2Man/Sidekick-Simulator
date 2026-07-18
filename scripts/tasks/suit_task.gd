@@ -8,10 +8,8 @@ static func create() -> Dictionary:
 		"suit",
 		"Restore Raccoon Man's suit",
 		"WORKSHOP",
-		"—",
-		-1,
-		55,
-		14,
+		"ALL DAY",
+		0,
 		[
 			TaskDefinition.create_step(
 				"suit_inspect", "Scan mud, burns and one dramatic tear", "Inspection scanner",

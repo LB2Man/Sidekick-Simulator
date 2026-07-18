@@ -5,24 +5,19 @@ static func create_task(
 	id: String,
 	title: String,
 	room: String,
-	deadline_label: String,
-	deadline: int,
-	reward_money: int,
-	reward_rep: int,
+	availability_label: String,
+	available_from: int,
 	steps: Array[Dictionary]
 ) -> Dictionary:
 	return {
 		"id": id,
 		"title": title,
 		"room": room,
-		"deadline_label": deadline_label,
-		"deadline": deadline,
-		"reward_money": reward_money,
-		"reward_rep": reward_rep,
+		"availability_label": availability_label,
+		"available_from": available_from,
 		"steps": steps,
 		"step_index": 0,
 		"status": "active",
-		"late": false,
 	}
 
 

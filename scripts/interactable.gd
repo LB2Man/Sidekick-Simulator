@@ -46,9 +46,11 @@ func _ready() -> void:
 	if not is_instance_valid(_label):
 		_label = get_node_or_null("ObjectLabel") as Label3D
 	if is_instance_valid(_mesh_instance):
-		_material = _mesh_instance.material_override as StandardMaterial3D
+		_material = _mesh_instance.material_override.duplicate() as StandardMaterial3D
+		_mesh_instance.material_override = _material
 	if is_instance_valid(_badge):
-		_badge_material = _badge.material_override as StandardMaterial3D
+		_badge_material = _badge.material_override.duplicate() as StandardMaterial3D
+		_badge.material_override = _badge_material
 	collision_layer = 5
 	collision_mask = 0
 	_pulse_offset = float(action_id.hash() % 100) * 0.07

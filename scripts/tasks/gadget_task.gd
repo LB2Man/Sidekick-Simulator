@@ -8,10 +8,8 @@ static func create() -> Dictionary:
 		"gadget",
 		"Repair the Grapnel-9000",
 		"WORKSHOP",
-		"—",
-		-1,
-		45,
-		12,
+		"ALL DAY",
+		0,
 		[
 			TaskDefinition.create_step(
 				"gadget_open", "Open the scorched casing", "Grapnel casing",

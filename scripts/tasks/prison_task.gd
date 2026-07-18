@@ -8,10 +8,8 @@ static func create() -> Dictionary:
 		"prison",
 		"Cell service: Doctor Dreadful",
 		"PRISON WING",
-		"12:00",
-		720,
-		28,
-		8,
+		"ALL DAY",
+		0,
 		[
 			TaskDefinition.create_step(
 				"cell_unlock", "Open the secure service hatch", "Hatch lock",

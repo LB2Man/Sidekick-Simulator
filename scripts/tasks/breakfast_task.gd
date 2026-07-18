@@ -8,10 +8,8 @@ static func create() -> Dictionary:
 		"breakfast",
 		"Make the hero's breakfast",
 		"KITCHEN",
-		"09:00",
-		540,
-		32,
-		9,
+		"ALL DAY",
+		0,
 		[
 			TaskDefinition.create_step(
 				"breakfast_eggs", "Collect two moon-hen eggs", "Egg basket",

@@ -96,22 +96,59 @@ func set_action_completed(action_id: String, completed: bool = true) -> void:
 		action_nodes[action_id].set_completed(completed)
 
 
+func set_bath_water_level(level: float) -> void:
+	var water := get_node_or_null("Props/BathWater") as Node3D
+	if not is_instance_valid(water):
+		return
+	var amount := clampf(level, 0.0, 1.0)
+	water.visible = amount > 0.01
+	water.position.y = 0.10 + amount * 0.27
+	water.scale.y = maxf(0.15, amount * 4.0)
+
+
+func set_bath_towel_state(state: String) -> void:
+	var towel := get_node_or_null("Props/TowelOnWarmer") as Node3D
+	if is_instance_valid(towel):
+		towel.visible = state in ["warming", "ready"]
+	set_bath_towel_heat(1.0 if state == "ready" else 0.0)
+
+
+func set_bath_towel_heat(progress: float) -> void:
+	var mesh := get_node_or_null("Props/TowelOnWarmer/Mesh") as MeshInstance3D
+	if not is_instance_valid(mesh):
+		return
+	if not mesh.has_meta("unique_heat_material"):
+		mesh.material_override = mesh.material_override.duplicate()
+		mesh.set_meta("unique_heat_material", true)
+	var material := mesh.material_override as StandardMaterial3D
+	if is_instance_valid(material):
+		material.emission_enabled = true
+		material.emission = Color("ffd9a0")
+		material.emission_energy_multiplier = lerpf(0.2, 1.2, clampf(progress, 0.0, 1.0))
+
+
+func set_bath_soap_filled(filled: bool) -> void:
+	var soap := get_node_or_null("Props/ShowerSoapCube") as Node3D
+	if is_instance_valid(soap):
+		soap.visible = filled
+
+
 func get_action_position(action_id: String) -> Vector3:
 	if action_nodes.has(action_id):
 		return action_nodes[action_id].global_position
 	return Vector3.ZERO
 
 
-func get_room_for_position(position: Vector3) -> String:
-	if position.z < 7.0:
-		if position.x < -8.0:
+func get_room_for_position(world_position: Vector3) -> String:
+	if world_position.z < 7.0:
+		if world_position.x < -8.0:
 			return "KITCHEN"
-		if position.x > 8.0:
+		if world_position.x > 8.0:
 			return "BATHROOM"
 		return "LOBBY"
-	if position.x < -8.0:
+	if world_position.x < -8.0:
 		return "PRISON WING"
-	if position.x > 8.0:
+	if world_position.x > 8.0:
 		return "WORKSHOP"
 	return "GARAGE"
 
@@ -129,28 +166,28 @@ func add_interactable(
 	room: String,
 	size: Vector3,
 	color: Color,
-	position: Vector3,
+	world_position: Vector3,
 	shape_kind: String = "box"
 ) -> Node:
-	return _make_interactable(action_id, object_name, hint, room, size, color, position, shape_kind)
+	return _make_interactable(action_id, object_name, hint, room, size, color, world_position, shape_kind)
 
 
 func add_block(
 	parent: Node,
 	object_name: String,
-	position: Vector3,
+	world_position: Vector3,
 	size: Vector3,
 	color: Color,
 	with_collision: bool = true,
 	emission_energy: float = 0.0
 ) -> MeshInstance3D:
-	return _block(parent, object_name, position, size, color, with_collision, emission_energy)
+	return _block(parent, object_name, world_position, size, color, with_collision, emission_energy)
 
 
 func add_cylinder(
 	parent: Node,
 	object_name: String,
-	position: Vector3,
+	world_position: Vector3,
 	radius: float,
 	height: float,
 	color: Color,
@@ -159,7 +196,7 @@ func add_cylinder(
 	rotation_degrees_value: Vector3 = Vector3.ZERO
 ) -> MeshInstance3D:
 	return _cylinder(
-		parent, object_name, position, radius, height, color,
+		parent, object_name, world_position, radius, height, color,
 		with_collision, emission_energy, rotation_degrees_value
 	)
 
@@ -167,25 +204,25 @@ func add_cylinder(
 func add_sphere(
 	parent: Node,
 	object_name: String,
-	position: Vector3,
+	world_position: Vector3,
 	radius: float,
 	color: Color,
 	emissive: bool = false,
 	emission_energy: float = 0.0
 ) -> MeshInstance3D:
-	return _sphere(parent, object_name, position, radius, color, emissive, emission_energy)
+	return _sphere(parent, object_name, world_position, radius, color, emissive, emission_energy)
 
 
-func add_room_light(position: Vector3, color: Color, energy: float, range_value: float) -> void:
-	_add_light(position, color, energy, range_value)
+func add_room_light(world_position: Vector3, color: Color, energy: float, range_value: float) -> void:
+	_add_light(world_position, color, energy, range_value)
 
 
-func add_room_title(text: String, position: Vector3, rotation_value: Vector3, color: Color) -> void:
-	_room_title(text, position, rotation_value, color)
+func add_room_title(text: String, world_position: Vector3, rotation_value: Vector3, color: Color) -> void:
+	_room_title(text, world_position, rotation_value, color)
 
 
-func add_raccoon_emblem(position: Vector3, rotation_value: Vector3, scale_value: float) -> void:
-	_raccoon_emblem(position, rotation_value, scale_value)
+func add_raccoon_emblem(world_position: Vector3, rotation_value: Vector3, scale_value: float) -> void:
+	_raccoon_emblem(world_position, rotation_value, scale_value)
 
 
 func _build_environment() -> void:
@@ -281,12 +318,12 @@ func _make_interactable(
 	room: String,
 	size: Vector3,
 	color: Color,
-	position: Vector3,
+	world_position: Vector3,
 	shape_kind: String = "box"
 ) -> Node:
 	var item := Interactable.new()
 	item.configure(action_id, object_name, hint, room, size, color, shape_kind)
-	item.position = position
+	item.position = world_position
 	item.activated.connect(_on_interactable_activated)
 	_interactables.add_child(item)
 	action_nodes[action_id] = item
@@ -307,7 +344,7 @@ func _folder(folder_name: String) -> Node3D:
 func _block(
 	parent: Node,
 	object_name: String,
-	position: Vector3,
+	world_position: Vector3,
 	size: Vector3,
 	color: Color,
 	with_collision: bool = true,
@@ -328,7 +365,7 @@ func _block(
 	else:
 		body = Node3D.new()
 	body.name = _unique_child_name(parent, object_name)
-	body.position = position
+	body.position = world_position
 	parent.add_child(body)
 	var mesh_instance := MeshInstance3D.new()
 	mesh_instance.name = "Mesh"
@@ -344,7 +381,7 @@ func _block(
 func _cylinder(
 	parent: Node,
 	object_name: String,
-	position: Vector3,
+	world_position: Vector3,
 	radius: float,
 	height: float,
 	color: Color,
@@ -367,7 +404,7 @@ func _cylinder(
 	else:
 		body = Node3D.new()
 	body.name = _unique_child_name(parent, object_name)
-	body.position = position
+	body.position = world_position
 	body.rotation_degrees = rotation_degrees_value
 	parent.add_child(body)
 	var instance := MeshInstance3D.new()
@@ -386,7 +423,7 @@ func _cylinder(
 func _sphere(
 	parent: Node,
 	object_name: String,
-	position: Vector3,
+	world_position: Vector3,
 	radius: float,
 	color: Color,
 	emissive: bool = false,
@@ -394,7 +431,7 @@ func _sphere(
 ) -> MeshInstance3D:
 	var instance := MeshInstance3D.new()
 	instance.name = _unique_child_name(parent, object_name)
-	instance.position = position
+	instance.position = world_position
 	var mesh := SphereMesh.new()
 	mesh.radius = radius
 	mesh.height = radius * 2.0
@@ -418,10 +455,10 @@ func _material(color: Color, metallic: float, roughness: float, emission_energy:
 	return material
 
 
-func _add_light(position: Vector3, color: Color, energy: float, range_value: float) -> void:
+func _add_light(world_position: Vector3, color: Color, energy: float, range_value: float) -> void:
 	var light := OmniLight3D.new()
 	light.name = _unique_child_name(_lights, "RoomLight")
-	light.position = position
+	light.position = world_position
 	light.light_color = color
 	light.light_energy = energy
 	light.omni_range = range_value
@@ -430,11 +467,11 @@ func _add_light(position: Vector3, color: Color, energy: float, range_value: flo
 	_lights.add_child(light)
 
 
-func _room_title(text: String, position: Vector3, rotation_value: Vector3, color: Color) -> void:
+func _room_title(text: String, world_position: Vector3, rotation_value: Vector3, color: Color) -> void:
 	var label := Label3D.new()
 	label.name = _unique_child_name(_props, "RoomTitle")
 	label.text = text
-	label.position = position
+	label.position = world_position
 	label.rotation_degrees = rotation_value
 	label.font_size = 34
 	label.outline_size = 10
@@ -444,10 +481,10 @@ func _room_title(text: String, position: Vector3, rotation_value: Vector3, color
 	_props.add_child(label)
 
 
-func _raccoon_emblem(position: Vector3, rotation_value: Vector3, scale_value: float) -> void:
+func _raccoon_emblem(world_position: Vector3, rotation_value: Vector3, scale_value: float) -> void:
 	var root := Node3D.new()
 	root.name = "RaccoonEmblem"
-	root.position = position
+	root.position = world_position
 	root.rotation_degrees = rotation_value
 	root.scale = Vector3.ONE * scale_value
 	_props.add_child(root)

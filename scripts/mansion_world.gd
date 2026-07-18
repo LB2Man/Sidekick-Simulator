@@ -25,22 +25,59 @@ func set_action_completed(action_id: String, completed: bool = true) -> void:
 		action_nodes[action_id].set_completed(completed)
 
 
+func set_bath_water_level(level: float) -> void:
+	var water := get_node_or_null("BathStation/Props/BathWater") as Node3D
+	if not is_instance_valid(water):
+		return
+	var amount := clampf(level, 0.0, 1.0)
+	water.visible = amount > 0.01
+	water.position.y = 0.10 + amount * 0.27
+	water.scale.y = maxf(0.15, amount * 4.0)
+
+
+func set_bath_towel_state(state: String) -> void:
+	var towel := get_node_or_null("BathStation/Props/TowelOnWarmer") as Node3D
+	if is_instance_valid(towel):
+		towel.visible = state in ["warming", "ready"]
+	set_bath_towel_heat(1.0 if state == "ready" else 0.0)
+
+
+func set_bath_towel_heat(progress: float) -> void:
+	var mesh := get_node_or_null("BathStation/Props/TowelOnWarmer/Mesh") as MeshInstance3D
+	if not is_instance_valid(mesh):
+		return
+	if not mesh.has_meta("unique_heat_material"):
+		mesh.material_override = mesh.material_override.duplicate()
+		mesh.set_meta("unique_heat_material", true)
+	var material := mesh.material_override as StandardMaterial3D
+	if is_instance_valid(material):
+		material.emission_enabled = true
+		material.emission = Color("ffd9a0")
+		material.emission_energy_multiplier = lerpf(0.2, 1.2, clampf(progress, 0.0, 1.0))
+
+
+func set_bath_soap_filled(filled: bool) -> void:
+	var soap := get_node_or_null("BathStation/Props/ShowerSoapCube") as Node3D
+	if is_instance_valid(soap):
+		soap.visible = filled
+
+
 func get_action_position(action_id: String) -> Vector3:
 	if action_nodes.has(action_id):
 		return action_nodes[action_id].global_position
 	return Vector3.ZERO
 
 
-func get_room_for_position(position: Vector3) -> String:
-	if position.z < 7.0:
-		if position.x < -8.0:
+func get_room_for_position(world_position: Vector3) -> String:
+	if world_position.z < 7.0:
+		if world_position.x < -8.0:
 			return "KITCHEN"
-		if position.x > 8.0:
+		if world_position.x > 8.0:
 			return "BATHROOM"
 		return "LOBBY"
-	if position.x < -8.0:
+	if world_position.x < -8.0:
 		return "PRISON WING"
-	if position.x > 8.0:
+	if world_position.x > 8.0:
 		return "WORKSHOP"
 	return "GARAGE"
 

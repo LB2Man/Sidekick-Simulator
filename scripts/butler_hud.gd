@@ -29,7 +29,7 @@ var _root: Control
 var _clock_label: Label
 var _phase_label: Label
 var _room_label: Label
-var _reward_label: Label
+var _bath_status_label: Label
 var _task_list: VBoxContainer
 var _task_details: VBoxContainer
 var _task_heading: Label
@@ -57,6 +57,15 @@ var _minigame_instruction: Label
 var _minigame_content: VBoxContainer
 var _timing_bar: ProgressBar
 var _timing_target: ColorRect
+var _temperature_label: Label
+var _temperature_hint: Label
+var _bath_monitor: PanelContainer
+var _bath_fill_label: Label
+var _bath_fill_bar: ProgressBar
+var _towel_timer_label: Label
+var _newspaper_overlay: Control
+var _newspaper_panel: PanelContainer
+var _newspaper_articles: GridContainer
 
 var _toast_time := 0.0
 var _subtitle_time := 0.0
@@ -66,11 +75,15 @@ var _briefing_open := true
 var _minigame_open := false
 var _minigame_kind := ""
 var _minigame_action := ""
+var _temperature_value := 32
 var _timing_value := 0.0
 var _timing_direction := 1.0
 var _timing_misses := 0
 var _wire_sequence := [0, 2, 1]
 var _wire_progress := 0
+var _newspaper_open := false
+var _fill_monitor_active := false
+var _towel_monitor_active := false
 
 var subtitles_enabled := true
 var high_contrast := false
@@ -85,9 +98,7 @@ func configure(task_manager: Node, player: Node3D, world: Node3D) -> void:
 	_build_ui()
 	_minimap.set_sources(_player, _world, _task_manager)
 	_task_manager.tasks_changed.connect(refresh_tasks)
-	_task_manager.rewards_changed.connect(_on_rewards_changed)
 	refresh_tasks()
-	_on_rewards_changed(_task_manager.reputation, _task_manager.money)
 	show_briefing()
 
 
@@ -120,6 +131,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			_close_minigame(false)
 			get_viewport().set_input_as_handled()
 		return
+	if _newspaper_open:
+		return
 	if _briefing_open:
 		return
 	if event.physical_keycode == KEY_ESCAPE:
@@ -148,6 +161,11 @@ func _unhandled_input(event: InputEvent) -> void:
 func update_clock(clock_text: String, phase_text: String) -> void:
 	_clock_label.text = clock_text
 	_phase_label.text = phase_text.to_upper()
+	if is_instance_valid(_bath_status_label):
+		var hour := int(clock_text.substr(0, 2))
+		var bath_open := hour >= 20 and phase_text != "MIDNIGHT EDITION"
+		_bath_status_label.text = "BATH OPEN" if bath_open else "BATH AT 20:00"
+		_bath_status_label.add_theme_color_override("font_color", GREEN if bath_open else GOLD)
 
 
 func update_room(room_name: String) -> void:
@@ -177,7 +195,7 @@ func show_subtitle(speaker: String, text: String, duration: float = 5.0) -> void
 
 func set_paused(value: bool) -> void:
 	_paused = value
-	_pause_overlay.visible = value and not _board_open and not _minigame_open and not _briefing_open
+	_pause_overlay.visible = value and not _board_open and not _minigame_open and not _briefing_open and not _newspaper_open
 	_interaction_panel.visible = false if value else not _interaction_label.text.is_empty()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if value else Input.MOUSE_MODE_CAPTURED
 
@@ -206,10 +224,75 @@ func start_minigame(data: Dictionary) -> void:
 	_clear_container(_minigame_content)
 	pause_requested.emit(true)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	if _minigame_kind == "wires":
-		_build_wire_minigame()
+	match _minigame_kind:
+		"wires":
+			_build_wire_minigame()
+		"temperature":
+			_build_temperature_minigame()
+		_:
+			_build_timing_minigame()
+
+
+func update_bath_fill(level: float, target_min: float, target_max: float) -> void:
+	_fill_monitor_active = level > 0.0
+	_bath_fill_bar.value = clampf(level, 0.0, 1.0) * 100.0
+	if level < target_min:
+		_bath_fill_label.text = "BATH LEVEL  %d%%  ·  FILLING TO GOLD BAND" % roundi(maxf(level, 0.0) * 100.0)
+		_bath_fill_label.add_theme_color_override("font_color", CYAN)
+	elif level <= target_max:
+		_bath_fill_label.text = "BATH LEVEL  %d%%  ·  STOP NOW" % roundi(level * 100.0)
+		_bath_fill_label.add_theme_color_override("font_color", GOLD)
 	else:
-		_build_timing_minigame()
+		_bath_fill_label.text = "BATH LEVEL  %d%%  ·  TOO HIGH" % roundi(level * 100.0)
+		_bath_fill_label.add_theme_color_override("font_color", RED)
+	_refresh_bath_monitor()
+
+
+func update_towel_timer(seconds_remaining: float) -> void:
+	_towel_monitor_active = seconds_remaining > 0.0
+	_towel_timer_label.text = "TOWEL WARMER  ·  %d SECONDS" % ceili(maxf(seconds_remaining, 0.0))
+	_refresh_bath_monitor()
+
+
+func show_newspaper(outcomes: Array[Dictionary]) -> void:
+	_newspaper_open = true
+	_newspaper_overlay.visible = true
+	_pause_overlay.visible = false
+	_interaction_panel.visible = false
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	_clear_container(_newspaper_articles)
+	var completed := 0
+	for outcome in outcomes:
+		if bool(outcome.complete):
+			completed += 1
+		var article := PanelContainer.new()
+		article.custom_minimum_size = Vector2(390.0, 112.0)
+		article.add_theme_stylebox_override("panel", _panel_style(Color("eee3c9"), Color("76684f"), 1, 4))
+		_newspaper_articles.add_child(article)
+		var margin := MarginContainer.new()
+		_margins(margin, 12, 9)
+		article.add_child(margin)
+		var copy := VBoxContainer.new()
+		copy.add_theme_constant_override("separation", 4)
+		margin.add_child(copy)
+		var headline := _label(str(outcome.headline), 14, Color("17130f"))
+		headline.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		copy.add_child(headline)
+		var story := _label(str(outcome.story), 11, Color("4a4032"))
+		story.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		copy.add_child(story)
+	var banner := _newspaper_panel.find_child("EditionBanner", true, false) as Label
+	if banner:
+		banner.text = "%d OF 6 SUPPORT SYSTEMS READY · RACCOON MAN'S NIGHT IN REVIEW" % completed
+	_newspaper_panel.scale = Vector2(0.58, 0.58) if not reduced_motion else Vector2.ONE
+	_newspaper_panel.rotation = deg_to_rad(-3.0) if not reduced_motion else 0.0
+	_newspaper_panel.modulate.a = 0.35 if not reduced_motion else 1.0
+	if not reduced_motion:
+		_newspaper_panel.pivot_offset = _newspaper_panel.size * 0.5
+		var tween := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS).set_parallel(true)
+		tween.tween_property(_newspaper_panel, "scale", Vector2.ONE, 0.75).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tween.tween_property(_newspaper_panel, "rotation", 0.0, 0.75).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		tween.tween_property(_newspaper_panel, "modulate:a", 1.0, 0.45)
 
 
 func refresh_tasks() -> void:
@@ -221,8 +304,8 @@ func refresh_tasks() -> void:
 		card.custom_minimum_size = Vector2(330.0, 58.0)
 		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		var complete: bool = task.status == "complete"
-		var late: bool = task.status == "late"
-		card.add_theme_stylebox_override("panel", _panel_style(Color("12202bd9"), GREEN if complete else (RED if late else Color("37515d")), 1, 8))
+		var available: bool = _task_manager.is_task_available(task)
+		card.add_theme_stylebox_override("panel", _panel_style(Color("12202bd9"), GREEN if complete else (Color("37515d") if available else Color("66747a")), 1, 8))
 		var margin := MarginContainer.new()
 		_margins(margin, 10, 7)
 		card.add_child(margin)
@@ -234,9 +317,9 @@ func refresh_tasks() -> void:
 		var title := _label(("✓  " if complete else "") + str(task.title), 14, GREEN if complete else TEXT)
 		title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		top.add_child(title)
-		var deadline := _label("LATE" if late else str(task.deadline_label), 12, RED if late else GOLD)
-		top.add_child(deadline)
-		var step_text := "All duties complete" if complete else str(_task_manager.current_step(task).label)
+		var availability := _label(str(task.availability_label), 12, GREEN if available else GOLD)
+		top.add_child(availability)
+		var step_text := "All duties complete" if complete else (str(_task_manager.current_step(task).label) if available else "Available at %s to stay warm" % str(task.availability_label))
 		var step := _label("%s  ·  %s  ·  %s" % [str(task.room), _task_manager.get_progress_text(task), step_text], 11, MUTED)
 		step.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		box.add_child(step)
@@ -271,12 +354,14 @@ func _build_ui() -> void:
 	_build_minimap()
 	_build_interaction_prompt()
 	_build_toolbelt()
+	_build_bath_monitor()
 	_build_toast()
 	_build_subtitles()
 	_build_pause_overlay()
 	_build_board_overlay()
 	_build_briefing_overlay()
 	_build_minigame_overlay()
+	_build_newspaper_overlay()
 
 
 func _build_status_bar() -> void:
@@ -311,8 +396,9 @@ func _build_status_bar() -> void:
 	location_box.add_child(location_caption)
 	_room_label = _label("GRAND FOYER", 15, TEXT)
 	location_box.add_child(_room_label)
-	_reward_label = _label("REP 12   ·   $80", 13, GOLD)
-	row.add_child(_reward_label)
+	_bath_status_label = _label("BATH AT 20:00", 12, GOLD)
+	_bath_status_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	row.add_child(_bath_status_label)
 
 
 func _build_task_panel() -> void:
@@ -460,6 +546,49 @@ func _build_toolbelt() -> void:
 		_tool_slots.append(slot)
 
 
+func _build_bath_monitor() -> void:
+	_bath_monitor = PanelContainer.new()
+	_bath_monitor.anchor_left = 1.0
+	_bath_monitor.anchor_right = 1.0
+	_bath_monitor.anchor_top = 1.0
+	_bath_monitor.anchor_bottom = 1.0
+	_bath_monitor.offset_left = -408.0
+	_bath_monitor.offset_right = -18.0
+	_bath_monitor.offset_top = -164.0
+	_bath_monitor.offset_bottom = -86.0
+	_bath_monitor.add_theme_stylebox_override("panel", _panel_style(Color("0b1821ef"), GOLD, 1, 8))
+	_bath_monitor.visible = false
+	_root.add_child(_bath_monitor)
+	var margin := MarginContainer.new()
+	_margins(margin, 12, 8)
+	_bath_monitor.add_child(margin)
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 5)
+	margin.add_child(box)
+	_bath_fill_label = _label("BATH LEVEL", 11, CYAN)
+	box.add_child(_bath_fill_label)
+	_bath_fill_bar = ProgressBar.new()
+	_bath_fill_bar.min_value = 0.0
+	_bath_fill_bar.max_value = 100.0
+	_bath_fill_bar.show_percentage = false
+	_bath_fill_bar.custom_minimum_size.y = 14.0
+	_bath_fill_bar.add_theme_stylebox_override("background", _panel_style(Color("111c25"), Color("445765"), 1, 4))
+	var fill := StyleBoxFlat.new()
+	fill.bg_color = CYAN
+	fill.set_corner_radius_all(4)
+	_bath_fill_bar.add_theme_stylebox_override("fill", fill)
+	box.add_child(_bath_fill_bar)
+	_towel_timer_label = _label("TOWEL WARMER", 11, GOLD)
+	box.add_child(_towel_timer_label)
+
+
+func _refresh_bath_monitor() -> void:
+	_bath_monitor.visible = _fill_monitor_active or _towel_monitor_active
+	_bath_fill_label.visible = _fill_monitor_active
+	_bath_fill_bar.visible = _fill_monitor_active
+	_towel_timer_label.visible = _towel_monitor_active
+
+
 func _build_toast() -> void:
 	_toast_panel = PanelContainer.new()
 	_toast_panel.anchor_left = 0.5
@@ -574,7 +703,7 @@ func _build_board_overlay() -> void:
 	close.custom_minimum_size = Vector2(150.0, 42.0)
 	close.pressed.connect(_close_board)
 	title_row.add_child(close)
-	var intro := _label("Jobs may be completed in any order. Gold markers show the next valid action for each job.", 14, MUTED)
+	var intro := _label("Duties prepare Raccoon Man for his night patrol. The recovery bath opens at 20:00 so it remains warm.", 14, MUTED)
 	box.add_child(intro)
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -636,6 +765,79 @@ func _build_minigame_overlay() -> void:
 	var cancel := _button("CANCEL  ·  ESC")
 	cancel.pressed.connect(func(): _close_minigame(false))
 	box.add_child(cancel)
+
+
+func _build_newspaper_overlay() -> void:
+	_newspaper_overlay = _overlay(Color("020407f2"))
+	_newspaper_overlay.visible = false
+	_root.add_child(_newspaper_overlay)
+	_newspaper_panel = _center_panel(_newspaper_overlay, Vector2(940, 680), Color("c9b889"))
+	_newspaper_panel.add_theme_stylebox_override("panel", _panel_style(Color("e8dcc0"), Color("6d6049"), 3, 3))
+	var box := _panel_vbox(_newspaper_panel, 24, 18)
+	var masthead := _label("THE MASKED CITY GAZETTE", 30, Color("17130f"))
+	masthead.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	box.add_child(masthead)
+	var edition := _label("MIDNIGHT EDITION · SERVICE RESULTS", 12, Color("5b4e3b"))
+	edition.name = "EditionBanner"
+	edition.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	box.add_child(edition)
+	var rule := HSeparator.new()
+	box.add_child(rule)
+	_newspaper_articles = GridContainer.new()
+	_newspaper_articles.columns = 2
+	_newspaper_articles.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_newspaper_articles.add_theme_constant_override("h_separation", 10)
+	_newspaper_articles.add_theme_constant_override("v_separation", 8)
+	box.add_child(_newspaper_articles)
+	var restart := _button("BEGIN A NEW DAY")
+	restart.custom_minimum_size.y = 44.0
+	restart.pressed.connect(func(): restart_requested.emit())
+	box.add_child(restart)
+
+
+func _build_temperature_minigame() -> void:
+	_temperature_value = 32
+	var hint := _label("Turn the cold and hot mixer wheels until the thermometer reads exactly 38°C.", 14, MUTED)
+	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_minigame_content.add_child(hint)
+	_temperature_label = _label("32°C", 44, CYAN)
+	_temperature_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_minigame_content.add_child(_temperature_label)
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 28)
+	_minigame_content.add_child(row)
+	var cold := _button("COLD  −2°")
+	cold.custom_minimum_size = Vector2(190, 78)
+	cold.add_theme_color_override("font_color", CYAN)
+	cold.pressed.connect(_adjust_temperature.bind(-2))
+	row.add_child(cold)
+	var hot := _button("HOT  +2°")
+	hot.custom_minimum_size = Vector2(190, 78)
+	hot.add_theme_color_override("font_color", RED)
+	hot.pressed.connect(_adjust_temperature.bind(2))
+	row.add_child(hot)
+	_temperature_hint = _label("Perfect temperature: 38°C", 13, GOLD)
+	_temperature_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_minigame_content.add_child(_temperature_hint)
+	var confirm := _button("LOCK TEMPERATURE")
+	confirm.pressed.connect(_confirm_temperature)
+	_minigame_content.add_child(confirm)
+
+
+func _adjust_temperature(change: int) -> void:
+	_temperature_value = clampi(_temperature_value + change, 20, 50)
+	_temperature_label.text = "%d°C" % _temperature_value
+	_temperature_label.add_theme_color_override("font_color", GOLD if _temperature_value == 38 else (CYAN if _temperature_value < 38 else RED))
+	_temperature_hint.text = "Perfect temperature reached." if _temperature_value == 38 else ("Too cold · add hot water" if _temperature_value < 38 else "Too hot · add cold water")
+
+
+func _confirm_temperature() -> void:
+	if _temperature_value == 38:
+		_close_minigame(true)
+	else:
+		_temperature_hint.text = "The master requires exactly 38°C. Adjust the mixer first."
+		_temperature_hint.add_theme_color_override("font_color", RED)
 
 
 func _build_wire_minigame() -> void:
@@ -740,6 +942,7 @@ func _populate_board() -> void:
 	for task in _task_manager.tasks:
 		var card := PanelContainer.new()
 		var complete: bool = task.status == "complete"
+		var available: bool = _task_manager.is_task_available(task)
 		card.add_theme_stylebox_override("panel", _panel_style(Color("13212be8"), GREEN if complete else Color("47616c"), 1, 8))
 		scroll.add_child(card)
 		var margin := MarginContainer.new()
@@ -759,9 +962,12 @@ func _populate_board() -> void:
 		var steps := _label(steps_text, 11, MUTED)
 		steps.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		info.add_child(steps)
-		var reward := _label("%s\n%s\n+$%d  +%d REP" % [str(task.room), "LATE" if task.late else str(task.deadline_label), task.reward_money, task.reward_rep], 12, RED if task.late else GOLD)
-		reward.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-		row.add_child(reward)
+		var schedule_text := "%s\n%s" % [str(task.room), str(task.availability_label)]
+		if not available:
+			schedule_text += "\nLOCKED"
+		var schedule := _label(schedule_text, 12, GOLD if available else MUTED)
+		schedule.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		row.add_child(schedule)
 
 
 func _close_board() -> void:
@@ -774,10 +980,6 @@ func _dismiss_briefing() -> void:
 	_briefing_open = false
 	_briefing_overlay.visible = false
 	briefing_dismissed.emit()
-
-
-func _on_rewards_changed(reputation: int, money: int) -> void:
-	_reward_label.text = "REP %d   ·   $%d" % [reputation, money]
 
 
 func _emit_settings() -> void:

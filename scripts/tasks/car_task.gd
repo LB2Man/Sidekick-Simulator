@@ -8,10 +8,8 @@ static func create() -> Dictionary:
 		"car",
 		"Ready the Raccoon Roadster",
 		"GARAGE",
-		"11:30",
-		690,
-		40,
-		10,
+		"ALL DAY",
+		0,
 		[
 			TaskDefinition.create_step(
 				"car_refuel", "Refill the stealth-fuel tank", "Fuel pump",

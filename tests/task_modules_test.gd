@@ -17,7 +17,7 @@ func _run() -> void:
 	root.add_child(world)
 
 	_check(task_manager.tasks.size() == 6, "Six modular task definitions are registered")
-	_check(_count_interactables(world) == 28, "Editable station scenes contain every action plus the task board")
+	_check(_count_interactables(world) == 33, "Editable station scenes contain all expanded actions plus the task board")
 	_check(
 		world.get_node("BathStation").scene_file_path == "res://scenes/stations/bath_station.tscn",
 		"Bath map is an editable scene instance"
@@ -28,6 +28,16 @@ func _run() -> void:
 	)
 	_check(str(task_manager.tasks[0].id) == "bath", "Bath task keeps its catalog order")
 	_check(str(task_manager.tasks[4].id) == "car", "Car task keeps its catalog order")
+	var locked_result: Dictionary = task_manager.try_action("bath_temperature")
+	_check(locked_result.status == "locked", "Bath preparation is locked before 20:00")
+	task_manager.set_minute_of_day(1200)
+	_check(task_manager.is_task_available(task_manager.tasks[0]), "Bath preparation unlocks at 20:00")
+	var temperature_result: Dictionary = task_manager.try_action("bath_temperature")
+	_check(temperature_result.status == "minigame" and temperature_result.kind == "temperature", "Bath mixer opens the 38°C temperature interaction")
+	task_manager.complete_minigame("bath_temperature")
+	var fill_result: Dictionary = task_manager.try_action("bath_fill")
+	_check(fill_result.status == "advanced", "Faucet starts the live bath fill")
+	_check(task_manager.reset_bath_fill(), "Overflow rewinds the bath to the faucet step")
 
 	for task in task_manager.tasks:
 		while task.status != "complete":
@@ -47,6 +57,9 @@ func _run() -> void:
 		if task.status == "complete":
 			completed_count += 1
 	_check(completed_count == 6, "Every modular task completes")
+	_check(task_manager.get_day_outcomes().size() == 6, "Midnight newspaper receives one outcome per duty")
+	var save_data: Dictionary = task_manager.get_save_data()
+	_check(not save_data.has("money") and not save_data.has("reputation"), "Task saves contain no money or reputation")
 	_finish()
 
 
