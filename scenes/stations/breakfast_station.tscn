@@ -1,0 +1,467 @@
+[gd_scene format=3 uid="uid://busgfsc5q17sh"]
+
+[ext_resource type="Script" uid="uid://bv2pl7t6npcyl" path="res://scripts/interactable.gd" id="1_c23gc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_smuol"]
+size = Vector3(17, 1.05, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_na5tx"]
+albedo_color = Color(0.42745098, 0.2784314, 0.1882353, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_skosj"]
+size = Vector3(17, 1.05, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ofak"]
+size = Vector3(1.45, 1.05, 13.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fbx08"]
+albedo_color = Color(0.42745098, 0.2784314, 0.1882353, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_w0ahb"]
+size = Vector3(1.45, 1.05, 13.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6bxha"]
+size = Vector3(5.8, 1.4, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xc0c6"]
+albedo_color = Color(0.19215687, 0.2509804, 0.28235295, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_akex5"]
+size = Vector3(5.8, 1.4, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_abg2y"]
+size = Vector3(6.1, 0.12, 2.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jr68s"]
+albedo_color = Color(0.8392157, 0.78431374, 0.6784314, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_ukegg"]
+size = Vector3(6.1, 0.12, 2.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf6ha"]
+albedo_color = Color(0.34901962, 0.2509804, 0.1882353, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_p8vl6"]
+size = Vector3(2.25, 1.1, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s7sv4"]
+albedo_color = Color(0.34901962, 0.2509804, 0.1882353, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_2xjhr"]
+size = Vector3(2.25, 1.1, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p6ifg"]
+albedo_color = Color(0.34901962, 0.2509804, 0.1882353, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_r18bk"]
+size = Vector3(2.25, 1.1, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2h1of"]
+albedo_color = Color(0.34901962, 0.2509804, 0.1882353, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_oruag"]
+size = Vector3(2.25, 1.1, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wif64"]
+albedo_color = Color(0.34901962, 0.2509804, 0.1882353, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_qyjvn"]
+size = Vector3(2.25, 1.1, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_stv7h"]
+albedo_color = Color(0.34901962, 0.2509804, 0.1882353, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_mauk5"]
+size = Vector3(2.25, 1.1, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mxaxq"]
+albedo_color = Color(0.6901961, 0.42745098, 0.3019608, 1)
+metallic = 0.3
+roughness = 0.45
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pjd8t"]
+top_radius = 0.24
+bottom_radius = 0.24
+height = 0.12
+radial_segments = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yxbeo"]
+albedo_color = Color(0.6901961, 0.42745098, 0.3019608, 1)
+metallic = 0.3
+roughness = 0.45
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_57kt8"]
+top_radius = 0.24
+bottom_radius = 0.24
+height = 0.12
+radial_segments = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7hij"]
+albedo_color = Color(0.6901961, 0.42745098, 0.3019608, 1)
+metallic = 0.3
+roughness = 0.45
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tcmd1"]
+top_radius = 0.24
+bottom_radius = 0.24
+height = 0.12
+radial_segments = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xpoia"]
+albedo_color = Color(0.7882353, 0.67058825, 0.4627451, 1)
+metallic = 0.22
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_eukc0"]
+size = Vector3(0.85, 0.35, 0.7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ww1dh"]
+size = Vector3(0.85, 0.35, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6v84w"]
+albedo_color = Color(1, 0.8117647, 0.4, 1)
+emission_enabled = true
+emission = Color(1, 0.7254902, 0.21960784, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_olh2i"]
+radius = 0.075
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cl64o"]
+albedo_color = Color(0.14901961, 0.19215687, 0.23529412, 1)
+metallic = 0.22
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_xtd6j"]
+size = Vector3(0.9, 1.1, 0.72)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o3038"]
+size = Vector3(0.9, 1.1, 0.72)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1e8h8"]
+albedo_color = Color(1, 0.8117647, 0.4, 1)
+emission_enabled = true
+emission = Color(1, 0.7254902, 0.21960784, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_8caj6"]
+radius = 0.075
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mx2hw"]
+albedo_color = Color(0.57254905, 0.3372549, 0.24705882, 1)
+metallic = 0.22
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_shlcy"]
+size = Vector3(1.65, 0.25, 1.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f2mm1"]
+size = Vector3(1.65, 0.25, 1.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6v4l5"]
+albedo_color = Color(1, 0.8117647, 0.4, 1)
+emission_enabled = true
+emission = Color(1, 0.7254902, 0.21960784, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_y6knn"]
+radius = 0.075
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f2ao1"]
+albedo_color = Color(0.7294118, 0.76862746, 0.7882353, 1)
+metallic = 0.22
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_57x28"]
+size = Vector3(1.3, 0.18, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jimk4"]
+size = Vector3(1.3, 0.18, 0.9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdivy"]
+albedo_color = Color(1, 0.8117647, 0.4, 1)
+emission_enabled = true
+emission = Color(1, 0.7254902, 0.21960784, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_0pf77"]
+radius = 0.075
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[node name="BreakfastStation" type="Node3D" unique_id=41937115]
+
+[node name="Architecture" type="Node3D" parent="." unique_id=1240625097]
+
+[node name="Props" type="Node3D" parent="." unique_id=389372571]
+
+[node name="RoomTitle" type="Label3D" parent="Props" unique_id=74024087]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5, 3.28, -10.68)
+modulate = Color(0.8392157, 0.78431374, 0.6784314, 1)
+outline_modulate = Color(0.03529412, 0.043137256, 0.06666667, 0.9098039)
+text = "KITCHEN & SERVICE"
+font_size = 34
+outline_size = 10
+
+[node name="BackCounter" type="StaticBody3D" parent="Props" unique_id=1475246542]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5, 0.55, -9.8)
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape3D" parent="Props/BackCounter" unique_id=184668526]
+shape = SubResource("BoxShape3D_smuol")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/BackCounter" unique_id=79632183]
+material_override = SubResource("StandardMaterial3D_na5tx")
+mesh = SubResource("BoxMesh_skosj")
+
+[node name="WestCounter" type="StaticBody3D" parent="Props" unique_id=1160975678]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5, 0.55, -2)
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape3D" parent="Props/WestCounter" unique_id=1771640273]
+shape = SubResource("BoxShape3D_8ofak")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/WestCounter" unique_id=151864682]
+material_override = SubResource("StandardMaterial3D_fbx08")
+mesh = SubResource("BoxMesh_w0ahb")
+
+[node name="KitchenIsland" type="StaticBody3D" parent="Props" unique_id=1761335569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.2, 0.72, -1.8)
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape3D" parent="Props/KitchenIsland" unique_id=2092797884]
+shape = SubResource("BoxShape3D_6bxha")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/KitchenIsland" unique_id=623322457]
+material_override = SubResource("StandardMaterial3D_xc0c6")
+mesh = SubResource("BoxMesh_akex5")
+
+[node name="IslandTop" type="StaticBody3D" parent="Props" unique_id=776342629]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.2, 1.47, -1.8)
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape3D" parent="Props/IslandTop" unique_id=1998003336]
+shape = SubResource("BoxShape3D_abg2y")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/IslandTop" unique_id=1665810388]
+material_override = SubResource("StandardMaterial3D_jr68s")
+mesh = SubResource("BoxMesh_ukegg")
+
+[node name="CabinetDoor" type="Node3D" parent="Props" unique_id=1392665477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5, 2.3, -10.25)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/CabinetDoor" unique_id=1996493101]
+material_override = SubResource("StandardMaterial3D_qf6ha")
+mesh = SubResource("BoxMesh_p8vl6")
+
+[node name="CabinetDoor2" type="Node3D" parent="Props" unique_id=540960811]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.7, 2.3, -10.25)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/CabinetDoor2" unique_id=1691552502]
+material_override = SubResource("StandardMaterial3D_s7sv4")
+mesh = SubResource("BoxMesh_2xjhr")
+
+[node name="CabinetDoor3" type="Node3D" parent="Props" unique_id=1830051829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.9, 2.3, -10.25)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/CabinetDoor3" unique_id=1981672952]
+material_override = SubResource("StandardMaterial3D_p6ifg")
+mesh = SubResource("BoxMesh_r18bk")
+
+[node name="CabinetDoor4" type="Node3D" parent="Props" unique_id=328592262]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1, 2.3, -10.25)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/CabinetDoor4" unique_id=1084322008]
+material_override = SubResource("StandardMaterial3D_2h1of")
+mesh = SubResource("BoxMesh_oruag")
+
+[node name="CabinetDoor5" type="Node3D" parent="Props" unique_id=2124078165]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3, 2.3, -10.25)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/CabinetDoor5" unique_id=458715101]
+material_override = SubResource("StandardMaterial3D_wif64")
+mesh = SubResource("BoxMesh_qyjvn")
+
+[node name="CabinetDoor6" type="Node3D" parent="Props" unique_id=2069966396]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2.3, -10.25)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/CabinetDoor6" unique_id=31128293]
+material_override = SubResource("StandardMaterial3D_stv7h")
+mesh = SubResource("BoxMesh_mauk5")
+
+[node name="CopperPan" type="Node3D" parent="Props" unique_id=499474219]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.3, 2.65, -10.55)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/CopperPan" unique_id=1938710988]
+material_override = SubResource("StandardMaterial3D_mxaxq")
+mesh = SubResource("CylinderMesh_pjd8t")
+
+[node name="CopperPan2" type="Node3D" parent="Props" unique_id=570722637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.68, 2.65, -10.55)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/CopperPan2" unique_id=1426087771]
+material_override = SubResource("StandardMaterial3D_yxbeo")
+mesh = SubResource("CylinderMesh_57kt8")
+
+[node name="CopperPan3" type="Node3D" parent="Props" unique_id=1165239944]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.06, 2.65, -10.55)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/CopperPan3" unique_id=453901554]
+material_override = SubResource("StandardMaterial3D_r7hij")
+mesh = SubResource("CylinderMesh_tcmd1")
+
+[node name="Interactables" type="Node3D" parent="." unique_id=334713365]
+
+[node name="Interactable_breakfast_eggs" type="StaticBody3D" parent="Interactables" unique_id=884626914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.1, 1.72, -1.8)
+script = ExtResource("1_c23gc")
+action_id = "breakfast_eggs"
+display_name = "Moon-hen egg basket"
+interaction_hint = "Take two eggs from"
+room_name = "KITCHEN"
+
+[node name="Object" type="MeshInstance3D" parent="Interactables/Interactable_breakfast_eggs" unique_id=1509209512]
+material_override = SubResource("StandardMaterial3D_xpoia")
+mesh = SubResource("BoxMesh_eukc0")
+
+[node name="@CollisionShape3D@19798" type="CollisionShape3D" parent="Interactables/Interactable_breakfast_eggs" unique_id=1914698285]
+shape = SubResource("BoxShape3D_ww1dh")
+
+[node name="InteractionBadge" type="MeshInstance3D" parent="Interactables/Interactable_breakfast_eggs" unique_id=243473585]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.415, 0)
+material_override = SubResource("StandardMaterial3D_6v84w")
+mesh = SubResource("SphereMesh_olh2i")
+
+[node name="ObjectLabel" type="Label3D" parent="Interactables/Interactable_breakfast_eggs" unique_id=1560375206]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.635, 0)
+billboard = 1
+modulate = Color(1, 0.90588236, 0.68235296, 1)
+outline_modulate = Color(0.09019608, 0.06666667, 0.09803922, 0.8627451)
+text = "MOON-HEN EGG BASKET"
+font_size = 22
+outline_size = 8
+
+[node name="Interactable_breakfast_coffee" type="StaticBody3D" parent="Interactables" unique_id=1186546743]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.2, 1.58, -9.15)
+script = ExtResource("1_c23gc")
+action_id = "breakfast_coffee"
+display_name = "Espresso automaton"
+interaction_hint = "Brew extra-dark at"
+room_name = "KITCHEN"
+
+[node name="Object" type="MeshInstance3D" parent="Interactables/Interactable_breakfast_coffee" unique_id=1173015230]
+material_override = SubResource("StandardMaterial3D_cl64o")
+mesh = SubResource("BoxMesh_xtd6j")
+
+[node name="@CollisionShape3D@19799" type="CollisionShape3D" parent="Interactables/Interactable_breakfast_coffee" unique_id=822383803]
+shape = SubResource("BoxShape3D_o3038")
+
+[node name="InteractionBadge" type="MeshInstance3D" parent="Interactables/Interactable_breakfast_coffee" unique_id=1089591477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79, 0)
+material_override = SubResource("StandardMaterial3D_1e8h8")
+mesh = SubResource("SphereMesh_8caj6")
+
+[node name="ObjectLabel" type="Label3D" parent="Interactables/Interactable_breakfast_coffee" unique_id=1579131284]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01, 0)
+billboard = 1
+modulate = Color(1, 0.90588236, 0.68235296, 1)
+outline_modulate = Color(0.09019608, 0.06666667, 0.09803922, 0.8627451)
+text = "ESPRESSO AUTOMATON"
+font_size = 22
+outline_size = 8
+
+[node name="Interactable_breakfast_cook" type="StaticBody3D" parent="Interactables" unique_id=1227562256]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8, 1.68, -1.8)
+script = ExtResource("1_c23gc")
+action_id = "breakfast_cook"
+display_name = "Copper induction range"
+interaction_hint = "Cook on"
+room_name = "KITCHEN"
+
+[node name="Object" type="MeshInstance3D" parent="Interactables/Interactable_breakfast_cook" unique_id=43520889]
+material_override = SubResource("StandardMaterial3D_mx2hw")
+mesh = SubResource("BoxMesh_shlcy")
+
+[node name="@CollisionShape3D@19800" type="CollisionShape3D" parent="Interactables/Interactable_breakfast_cook" unique_id=349254534]
+shape = SubResource("BoxShape3D_f2mm1")
+
+[node name="InteractionBadge" type="MeshInstance3D" parent="Interactables/Interactable_breakfast_cook" unique_id=505564172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.365, 0)
+material_override = SubResource("StandardMaterial3D_6v4l5")
+mesh = SubResource("SphereMesh_y6knn")
+
+[node name="ObjectLabel" type="Label3D" parent="Interactables/Interactable_breakfast_cook" unique_id=702339912]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.585, 0)
+billboard = 1
+modulate = Color(1, 0.90588236, 0.68235296, 1)
+outline_modulate = Color(0.09019608, 0.06666667, 0.09803922, 0.8627451)
+text = "COPPER INDUCTION RANGE"
+font_size = 22
+outline_size = 8
+
+[node name="Interactable_breakfast_plate" type="StaticBody3D" parent="Interactables" unique_id=1839918535]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4, 1.64, -1.8)
+script = ExtResource("1_c23gc")
+action_id = "breakfast_plate"
+display_name = "Silver service pass"
+interaction_hint = "Plate breakfast at"
+room_name = "KITCHEN"
+
+[node name="Object" type="MeshInstance3D" parent="Interactables/Interactable_breakfast_plate" unique_id=1899195250]
+material_override = SubResource("StandardMaterial3D_f2ao1")
+mesh = SubResource("BoxMesh_57x28")
+
+[node name="@CollisionShape3D@19801" type="CollisionShape3D" parent="Interactables/Interactable_breakfast_plate" unique_id=1924254314]
+shape = SubResource("BoxShape3D_jimk4")
+
+[node name="InteractionBadge" type="MeshInstance3D" parent="Interactables/Interactable_breakfast_plate" unique_id=1134118348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33, 0)
+material_override = SubResource("StandardMaterial3D_cdivy")
+mesh = SubResource("SphereMesh_0pf77")
+
+[node name="ObjectLabel" type="Label3D" parent="Interactables/Interactable_breakfast_plate" unique_id=506289370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+billboard = 1
+modulate = Color(1, 0.90588236, 0.68235296, 1)
+outline_modulate = Color(0.09019608, 0.06666667, 0.09803922, 0.8627451)
+text = "SILVER SERVICE PASS"
+font_size = 22
+outline_size = 8
+
+[node name="Lighting" type="Node3D" parent="." unique_id=413638024]
+
+[node name="RoomLight" type="OmniLight3D" parent="Lighting" unique_id=1516229450]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 3.85, -2)
+light_color = Color(1, 0.89411765, 0.7411765, 1)
+light_energy = 2.25
+shadow_enabled = true
+omni_range = 11.0
+omni_attenuation = 1.1
+
+[node name="RoomLight2" type="OmniLight3D" parent="Lighting" unique_id=682434943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 3.4, -8.5)
+light_color = Color(1, 0.8156863, 0.627451, 1)
+light_energy = 1.1
+shadow_enabled = true
+omni_range = 6.0
+omni_attenuation = 1.1

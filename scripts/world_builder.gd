@@ -3,17 +3,19 @@ extends Node3D
 signal action_requested(action_id: String, object_name: String)
 
 const Interactable = preload("res://scripts/interactable.gd")
+const Lobby = preload("res://scripts/world/lobby.gd")
+const BreakfastStation = preload("res://scripts/world/breakfast_station.gd")
+const BathStation = preload("res://scripts/world/bath_station.gd")
+const GadgetStation = preload("res://scripts/world/gadget_station.gd")
+const SuitStation = preload("res://scripts/world/suit_station.gd")
+const CarStation = preload("res://scripts/world/car_station.gd")
+const PrisonStation = preload("res://scripts/world/prison_station.gd")
 
-const C_WOOD := Color("3b241f")
-const C_WOOD_LIGHT := Color("6d4730")
 const C_STONE := Color("27313d")
 const C_WALL := Color("34303b")
 const C_WALL_WARM := Color("514449")
 const C_GOLD := Color("d7a84c")
 const C_CYAN := Color("47d7e8")
-const C_TEAL := Color("178b8f")
-const C_RED := Color("a94444")
-const C_CREAM := Color("d6c8ad")
 const C_INK := Color("11151d")
 
 @export var baked_scene := false
@@ -43,34 +45,50 @@ func _ready() -> void:
 
 func build_world() -> void:
 	name = "MansionAndLair"
+	_initialize_folders()
+	_build_environment()
+	_build_shell()
+	Lobby.build(self)
+	BreakfastStation.build(self)
+	BathStation.build(self)
+	GadgetStation.build(self)
+	SuitStation.build(self)
+	CarStation.build(self)
+	PrisonStation.build(self)
+
+
+func build_shell_scene() -> void:
+	_initialize_folders()
+	_build_environment()
+	_build_shell()
+
+
+func build_station_scene(station_script: Script) -> void:
+	_initialize_folders()
+	station_script.build(self)
+
+
+func _initialize_folders() -> void:
 	_architecture = _folder("Architecture")
 	_props = _folder("Props")
 	_interactables = _folder("Interactables")
 	_lights = _folder("Lighting")
-	_build_environment()
-	_build_shell()
-	_build_lobby()
-	_build_kitchen()
-	_build_bathroom()
-	_build_workshop()
-	_build_garage()
-	_build_prison()
 
 
 func _index_baked_world() -> void:
-	_architecture = get_node_or_null("Architecture") as Node3D
-	_props = get_node_or_null("Props") as Node3D
-	_interactables = get_node_or_null("Interactables") as Node3D
-	_lights = get_node_or_null("Lighting") as Node3D
 	action_nodes.clear()
-	if not is_instance_valid(_interactables):
-		push_error("Baked mansion scene is missing its Interactables folder.")
-		return
-	for item in _interactables.get_children():
+	_index_interactables(self)
+	if action_nodes.is_empty():
+		push_error("Editable mansion scene does not contain any interactables.")
+
+
+func _index_interactables(parent: Node) -> void:
+	for item in parent.get_children():
 		if item.has_method("get_interaction_text") and not str(item.action_id).is_empty():
 			action_nodes[str(item.action_id)] = item
 			if item.has_signal("activated") and not item.activated.is_connected(_on_interactable_activated):
 				item.activated.connect(_on_interactable_activated)
+		_index_interactables(item)
 
 
 func set_action_completed(action_id: String, completed: bool = true) -> void:
@@ -96,6 +114,78 @@ func get_room_for_position(position: Vector3) -> String:
 	if position.x > 8.0:
 		return "WORKSHOP"
 	return "GARAGE"
+
+
+# Room modules use this small construction API and do not need access to the
+# world builder's orchestration or indexing internals.
+func get_props_root() -> Node3D:
+	return _props
+
+
+func add_interactable(
+	action_id: String,
+	object_name: String,
+	hint: String,
+	room: String,
+	size: Vector3,
+	color: Color,
+	position: Vector3,
+	shape_kind: String = "box"
+) -> Node:
+	return _make_interactable(action_id, object_name, hint, room, size, color, position, shape_kind)
+
+
+func add_block(
+	parent: Node,
+	object_name: String,
+	position: Vector3,
+	size: Vector3,
+	color: Color,
+	with_collision: bool = true,
+	emission_energy: float = 0.0
+) -> MeshInstance3D:
+	return _block(parent, object_name, position, size, color, with_collision, emission_energy)
+
+
+func add_cylinder(
+	parent: Node,
+	object_name: String,
+	position: Vector3,
+	radius: float,
+	height: float,
+	color: Color,
+	with_collision: bool = false,
+	emission_energy: float = 0.0,
+	rotation_degrees_value: Vector3 = Vector3.ZERO
+) -> MeshInstance3D:
+	return _cylinder(
+		parent, object_name, position, radius, height, color,
+		with_collision, emission_energy, rotation_degrees_value
+	)
+
+
+func add_sphere(
+	parent: Node,
+	object_name: String,
+	position: Vector3,
+	radius: float,
+	color: Color,
+	emissive: bool = false,
+	emission_energy: float = 0.0
+) -> MeshInstance3D:
+	return _sphere(parent, object_name, position, radius, color, emissive, emission_energy)
+
+
+func add_room_light(position: Vector3, color: Color, energy: float, range_value: float) -> void:
+	_add_light(position, color, energy, range_value)
+
+
+func add_room_title(text: String, position: Vector3, rotation_value: Vector3, color: Color) -> void:
+	_room_title(text, position, rotation_value, color)
+
+
+func add_raccoon_emblem(position: Vector3, rotation_value: Vector3, scale_value: float) -> void:
+	_raccoon_emblem(position, rotation_value, scale_value)
 
 
 func _build_environment() -> void:
@@ -184,173 +274,6 @@ func _build_shell() -> void:
 		_block(_architecture, "BrassTrim", Vector3(0.0, 0.34, z), Vector3(53.0, 0.12, 0.08), C_GOLD, false, 0.6)
 
 
-func _build_lobby() -> void:
-	_room_title("THE GRAND FOYER", Vector3(0.0, 3.25, -10.68), Vector3(0.0, 0.0, 0.0), C_GOLD)
-	_block(_props, "FoyerRug", Vector3(0.0, 0.08, -1.8), Vector3(5.4, 0.08, 8.8), Color("6f2630"), false)
-	for x in [-3.2, 3.2]:
-		_cylinder(_props, "MarbleColumn", Vector3(x, 1.8, -6.3), 0.34, 3.6, Color("b9ae9b"), true)
-		_cylinder(_props, "ColumnBase", Vector3(x, 0.18, -6.3), 0.52, 0.22, C_GOLD)
-
-	# Butler's central desk and illuminated task board.
-	_block(_props, "ButlerDesk", Vector3(-3.6, 0.62, 3.5), Vector3(2.6, 1.15, 1.1), C_WOOD_LIGHT)
-	var board := _make_interactable("task_board", "Daily Task Board", "Review", "LOBBY", Vector3(2.6, 1.55, 0.18), Color("18323b"), Vector3(-3.6, 2.25, 4.05))
-	board.rotation_degrees.y = 180.0
-	_add_light(Vector3(-3.6, 3.3, 3.4), C_CYAN, 1.7, 4.8)
-
-	# Fireplace and portrait wall: cozy counterpoint to the lair.
-	_block(_props, "Fireplace", Vector3(5.55, 1.0, -4.0), Vector3(1.1, 2.0, 3.6), Color("4d3b3b"))
-	_block(_props, "Firebox", Vector3(4.95, 0.68, -4.0), Vector3(0.16, 0.9, 1.7), C_INK, false)
-	for i in range(5):
-		_sphere(_props, "FireGlow", Vector3(4.82, 0.45 + (i % 2) * 0.18, -4.55 + i * 0.28), 0.17, Color("ff8c35"), true, 2.4)
-	_add_light(Vector3(4.25, 1.05, -4.0), Color("ff9c55"), 2.7, 6.0)
-	_block(_props, "Portrait", Vector3(5.75, 2.75, 1.4), Vector3(0.12, 2.05, 2.7), Color("171f2b"), false)
-	_block(_props, "PortraitFrame", Vector3(5.67, 2.75, 1.4), Vector3(0.05, 2.35, 3.0), C_GOLD, false, 0.45)
-	_raccoon_emblem(Vector3(5.60, 2.82, 1.4), Vector3(0.0, 0.0, 90.0), 0.75)
-
-	# Mansion chandelier.
-	_cylinder(_props, "ChandelierStem", Vector3(0.0, 4.15, -2.0), 0.05, 1.0, C_GOLD)
-	for i in range(8):
-		var angle := TAU * float(i) / 8.0
-		var bulb_pos := Vector3(cos(angle) * 1.0, 3.65, -2.0 + sin(angle) * 1.0)
-		_sphere(_props, "ChandelierBulb", bulb_pos, 0.10, Color("ffd9a0"), true, 1.8)
-	_add_light(Vector3(0.0, 3.65, -2.0), Color("ffd3a0"), 2.0, 10.5)
-
-
-func _build_kitchen() -> void:
-	_room_title("KITCHEN & SERVICE", Vector3(-17.5, 3.28, -10.68), Vector3.ZERO, C_CREAM)
-	# Continuous cabinetry gives the room a convincing working-kitchen silhouette.
-	_block(_props, "BackCounter", Vector3(-17.5, 0.55, -9.8), Vector3(17.0, 1.05, 1.5), C_WOOD_LIGHT)
-	_block(_props, "WestCounter", Vector3(-25.5, 0.55, -2.0), Vector3(1.45, 1.05, 13.5), C_WOOD_LIGHT)
-	_block(_props, "KitchenIsland", Vector3(-17.2, 0.72, -1.8), Vector3(5.8, 1.4, 2.5), Color("314048"))
-	_block(_props, "IslandTop", Vector3(-17.2, 1.47, -1.8), Vector3(6.1, 0.12, 2.8), C_CREAM)
-	for x in [-23.5, -20.7, -17.9, -15.1, -12.3, -9.5]:
-		_block(_props, "CabinetDoor", Vector3(x, 2.3, -10.25), Vector3(2.25, 1.1, 0.18), Color("594030"), false)
-
-	_make_interactable("breakfast_eggs", "Moon-hen egg basket", "Take two eggs from", "KITCHEN", Vector3(0.85, 0.35, 0.7), Color("c9ab76"), Vector3(-19.1, 1.72, -1.8))
-	_make_interactable("breakfast_coffee", "Espresso automaton", "Brew extra-dark at", "KITCHEN", Vector3(0.9, 1.1, 0.72), Color("26313c"), Vector3(-12.2, 1.58, -9.15))
-	_make_interactable("breakfast_cook", "Copper induction range", "Cook on", "KITCHEN", Vector3(1.65, 0.25, 1.1), Color("92563f"), Vector3(-16.8, 1.68, -1.8))
-	_make_interactable("breakfast_plate", "Silver service pass", "Plate breakfast at", "KITCHEN", Vector3(1.3, 0.18, 0.9), Color("bac4c9"), Vector3(-14.4, 1.64, -1.8))
-	for i in range(3):
-		_cylinder(_props, "CopperPan", Vector3(-22.3 + i * 0.62, 2.65, -10.55), 0.24, 0.12, Color("b06d4d"))
-	_add_light(Vector3(-17.0, 3.85, -2.0), Color("ffe4bd"), 2.25, 11.0)
-	_add_light(Vector3(-23.0, 3.4, -8.5), Color("ffd0a0"), 1.1, 6.0)
-
-
-func _build_bathroom() -> void:
-	_room_title("HERO BATH & RECOVERY", Vector3(17.5, 3.28, -10.68), Vector3.ZERO, Color("a9e9e2"))
-	# Raised tiled bath platform.
-	_block(_props, "BathDais", Vector3(18.3, 0.18, -2.3), Vector3(10.2, 0.35, 7.2), Color("647c82"))
-	_block(_props, "TubLeft", Vector3(15.2, 0.82, -2.3), Vector3(0.55, 1.3, 5.3), C_CREAM)
-	_block(_props, "TubRight", Vector3(21.4, 0.82, -2.3), Vector3(0.55, 1.3, 5.3), C_CREAM)
-	_block(_props, "TubFront", Vector3(18.3, 0.82, 0.1), Vector3(6.7, 1.3, 0.55), C_CREAM)
-	_block(_props, "TubBack", Vector3(18.3, 0.82, -4.7), Vector3(6.7, 1.3, 0.55), C_CREAM)
-	_block(_props, "BathWater", Vector3(18.3, 0.48, -2.3), Vector3(5.65, 0.08, 4.3), Color("439ab2a8"), false, 0.5)
-	_make_interactable("bath_temperature", "Warm brass mixer", "Set 39°C on", "BATHROOM", Vector3(0.48, 0.48, 0.48), C_GOLD, Vector3(21.1, 1.72, -4.3), "sphere")
-	_make_interactable("bath_products", "Cedar bath salts", "Add", "BATHROOM", Vector3(0.55, 0.8, 0.55), Color("7d4f35"), Vector3(22.7, 0.72, -5.3), "cylinder")
-	_make_interactable("bath_fill", "Faucet lever", "Fill tub with", "BATHROOM", Vector3(0.35, 0.72, 0.35), C_CYAN, Vector3(20.3, 1.75, -4.4), "cylinder")
-	_make_interactable("bath_stop", "Emergency stop valve", "Stop water at", "BATHROOM", Vector3(0.55, 0.55, 0.25), C_RED, Vector3(18.3, 1.58, -4.58))
-	_block(_props, "TowelCabinet", Vector3(25.25, 1.15, 1.8), Vector3(1.3, 2.3, 4.0), Color("42545b"))
-	for y in [0.65, 1.25, 1.85]:
-		_block(_props, "FoldedTowel", Vector3(24.55, y, 1.8), Vector3(0.12, 0.28, 2.4), Color("d7e5df"), false)
-	_add_light(Vector3(18.0, 3.75, -2.0), Color("b8f4ec"), 2.25, 10.0)
-	_add_light(Vector3(24.5, 3.1, -8.0), Color("7adce6"), 0.95, 5.0)
-
-
-func _build_workshop() -> void:
-	_room_title("GADGET LAB & SUIT CARE", Vector3(17.5, 3.25, 27.68), Vector3(0.0, 180.0, 0.0), C_CYAN)
-	_block(_props, "GadgetBench", Vector3(20.6, 0.75, 20.0), Vector3(10.0, 1.45, 2.2), Color("263c46"))
-	_block(_props, "BenchGlow", Vector3(20.6, 1.5, 19.25), Vector3(9.6, 0.06, 0.12), C_CYAN, false, 2.2)
-	for x in [10.3, 13.5, 16.7, 19.9, 23.1]:
-		_block(_props, "Monitor", Vector3(x, 2.55, 27.5), Vector3(2.45, 1.25, 0.18), Color("123d4b"), false, 1.2)
-		_block(_props, "MonitorLine", Vector3(x, 2.55, 27.38), Vector3(1.55, 0.08, 0.04), C_CYAN, false, 2.3)
-
-	_make_interactable("gadget_open", "Grapnel casing", "Open", "WORKSHOP", Vector3(1.2, 0.34, 0.68), Color("4b6570"), Vector3(17.7, 1.63, 19.8))
-	_make_interactable("gadget_wires", "Wire matrix", "Reconnect", "WORKSHOP", Vector3(1.15, 0.5, 0.18), Color("693b59"), Vector3(19.4, 1.82, 19.02))
-	_make_interactable("gadget_battery", "Charged power cell", "Install", "WORKSHOP", Vector3(0.42, 0.82, 0.42), C_CYAN, Vector3(21.2, 1.95, 19.8), "cylinder")
-	_make_interactable("gadget_calibrate", "Calibration dial", "Tune", "WORKSHOP", Vector3(0.62, 0.62, 0.28), C_GOLD, Vector3(22.9, 1.82, 19.05), "cylinder")
-	_make_interactable("gadget_close", "Return cradle", "Seal gadget in", "WORKSHOP", Vector3(1.3, 0.32, 0.85), Color("2b5660"), Vector3(24.8, 1.64, 19.8))
-
-	# Suit-care line along the east wall.
-	for z in [9.6, 12.7, 15.8, 18.9, 22.0, 25.1]:
-		_block(_props, "SuitBay", Vector3(25.8, 1.65, z), Vector3(1.5, 3.1, 2.35), Color("25313c"))
-	var suit_actions := [
-		["suit_inspect", "Inspection scanner", "Scan suit with", "9.6", C_CYAN],
-		["suit_wash", "Suit washer", "Wash suit in", "12.7", Color("48717d")],
-		["suit_dry", "Ion drying chamber", "Dry suit in", "15.8", Color("526b87")],
-		["suit_repair", "Ballistic repair bench", "Patch tear at", "18.9", C_GOLD],
-		["suit_polish", "Emblem polishing wheel", "Polish at", "22.0", Color("b7c3cb")],
-		["suit_display", "Suit display cradle", "Return suit to", "25.1", Color("324e59")],
-	]
-	for item in suit_actions:
-		_make_interactable(item[0], item[1], item[2], "WORKSHOP", Vector3(0.55, 1.25, 1.25), item[4], Vector3(24.95, 1.7, float(item[3])))
-	# A graphic raccoon suit silhouette in the final display.
-	_sphere(_props, "SuitHead", Vector3(25.35, 2.55, 25.1), 0.28, C_INK)
-	_block(_props, "SuitBody", Vector3(25.38, 1.72, 25.1), Vector3(0.34, 1.25, 0.75), Color("293b49"), false)
-	_add_light(Vector3(18.0, 3.65, 18.0), C_CYAN, 2.2, 12.0)
-	_add_light(Vector3(25.0, 3.2, 24.0), Color("f6c879"), 1.4, 6.0)
-
-
-func _build_garage() -> void:
-	_room_title("RACCOON ROADSTER BAY", Vector3(0.0, 3.25, 27.68), Vector3(0.0, 180.0, 0.0), C_CYAN)
-	# Hero car: a broad stylized silhouette with teal tech light and gold trim.
-	_block(_props, "RoadsterBody", Vector3(0.0, 0.83, 18.0), Vector3(4.8, 0.85, 8.6), Color("172735"))
-	_block(_props, "RoadsterCab", Vector3(0.0, 1.55, 17.3), Vector3(3.6, 0.85, 3.6), Color("213e4c"))
-	_block(_props, "Windshield", Vector3(0.0, 1.74, 15.48), Vector3(3.2, 0.45, 0.08), Color("4db8c1"), false, 1.0)
-	_block(_props, "RoadsterStripe", Vector3(0.0, 1.28, 20.4), Vector3(0.42, 0.06, 3.4), C_GOLD, false, 1.2)
-	for x in [-2.25, 2.25]:
-		for z in [15.7, 20.2]:
-			_cylinder(_props, "RoadsterWheel", Vector3(x, 0.65, z), 0.72, 0.48, C_INK, true, 0.0, Vector3(0.0, 0.0, 90.0))
-			_cylinder(_props, "WheelHub", Vector3(x * 1.01, 0.65, z), 0.3, 0.52, C_GOLD, false, 0.8, Vector3(0.0, 0.0, 90.0))
-	# Mask-like headlights.
-	for x in [-1.35, 1.35]:
-		_sphere(_props, "Headlight", Vector3(x, 1.0, 13.66), 0.23, C_CYAN, true, 2.8)
-	_add_light(Vector3(0.0, 1.0, 12.9), C_CYAN, 1.0, 7.0)
-
-	_make_interactable("car_refuel", "Stealth-fuel pump", "Refuel from", "GARAGE", Vector3(1.0, 2.1, 0.9), Color("45525b"), Vector3(-5.8, 1.05, 20.7))
-	_make_interactable("car_tires", "Tire console", "Set tire pressure at", "GARAGE", Vector3(1.25, 1.1, 0.55), Color("315e68"), Vector3(5.9, 0.78, 16.0))
-	_make_interactable("car_clean", "Roadster wash controls", "Clean car using", "GARAGE", Vector3(1.25, 1.1, 0.55), Color("2a7983"), Vector3(5.9, 0.78, 20.0))
-	_make_interactable("car_load", "Smoke-acorn trunk", "Load gadgets into", "GARAGE", Vector3(2.0, 0.34, 1.2), C_GOLD, Vector3(0.0, 1.42, 21.5))
-	# Ceiling service stripes and hazard floor lines.
-	for x in [-6.8, 6.8]:
-		_block(_props, "HazardLine", Vector3(x, 0.09, 18.0), Vector3(0.16, 0.08, 16.0), C_GOLD, false, 1.0)
-	for z in [9.0, 26.0]:
-		_block(_props, "HazardLine", Vector3(0.0, 0.09, z), Vector3(13.6, 0.08, 0.16), C_GOLD, false, 1.0)
-	_add_light(Vector3(0.0, 3.75, 18.0), Color("79dce8"), 2.3, 12.5)
-	_add_light(Vector3(0.0, 3.75, 25.0), Color("78b9d8"), 1.5, 8.0)
-
-
-func _build_prison() -> void:
-	_room_title("SECURE HOLDING · CELL 01", Vector3(-17.5, 3.25, 27.68), Vector3(0.0, 180.0, 0.0), Color("e5a86e"))
-	# Cell occupies the rear half, with readable bars and a safe service aisle.
-	_block(_props, "CellBack", Vector3(-17.5, 2.1, 26.9), Vector3(16.5, 4.1, 0.55), Color("24272b"))
-	for x in [-25.0, -24.0, -23.0, -22.0, -21.0, -20.0, -19.0, -18.0, -17.0, -16.0, -15.0, -14.0, -13.0, -12.0, -11.0, -10.0]:
-		_cylinder(_props, "CellBar", Vector3(x, 2.2, 18.2), 0.075, 4.2, Color("626c73"), true, 0.0)
-	_block(_props, "BarTop", Vector3(-17.5, 4.18, 18.2), Vector3(16.5, 0.18, 0.24), Color("626c73"))
-	_block(_props, "BarBottom", Vector3(-17.5, 0.2, 18.2), Vector3(16.5, 0.18, 0.24), Color("626c73"))
-	# Comedic villain presence behind the bars.
-	_sphere(_props, "VillainHead", Vector3(-18.5, 1.9, 23.0), 0.42, Color("75506f"))
-	_block(_props, "VillainBody", Vector3(-18.5, 0.95, 23.0), Vector3(0.85, 1.4, 0.62), Color("4d334f"), false)
-	for x in [-18.68, -18.32]:
-		_sphere(_props, "VillainEye", Vector3(x, 2.0, 22.62), 0.06, Color("f0d46a"), true, 1.5)
-	var quote := Label3D.new()
-	quote.text = "‘Your soup lacks menace.’"
-	quote.position = Vector3(-18.5, 2.8, 22.5)
-	quote.font_size = 24
-	quote.outline_size = 8
-	quote.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_props.add_child(quote)
-
-	_make_interactable("cell_unlock", "Secure hatch lock", "Unlock", "PRISON WING", Vector3(0.55, 0.72, 0.25), C_RED, Vector3(-23.5, 1.25, 18.0))
-	_make_interactable("cell_food", "Approved villain lunch", "Deliver", "PRISON WING", Vector3(1.05, 0.5, 0.8), Color("a97a4d"), Vector3(-21.5, 0.45, 14.6))
-	_make_interactable("cell_clean", "Cell sanitation console", "Sanitize floor from", "PRISON WING", Vector3(1.1, 1.15, 0.55), Color("2e7279"), Vector3(-13.2, 0.68, 14.4))
-	_make_interactable("cell_lock", "Security verification panel", "Lock and verify", "PRISON WING", Vector3(0.8, 1.2, 0.28), C_GOLD, Vector3(-11.3, 1.2, 18.0))
-	_block(_props, "SecurityDesk", Vector3(-17.0, 0.65, 10.2), Vector3(4.4, 1.2, 1.3), Color("303a41"))
-	for i in range(3):
-		_block(_props, "SecurityScreen", Vector3(-18.3 + i * 1.3, 1.55, 10.25), Vector3(1.0, 0.62, 0.12), Color("3b2229") if i == 1 else Color("183f48"), false, 1.2)
-	_add_light(Vector3(-17.5, 3.55, 13.0), Color("d9d7c9"), 1.25, 8.0)
-	_add_light(Vector3(-18.0, 3.2, 23.0), Color("dc6c5d"), 1.3, 7.0)
-
-
 func _make_interactable(
 	action_id: String,
 	object_name: String,
@@ -396,6 +319,7 @@ func _block(
 		static_body.collision_layer = 1
 		static_body.collision_mask = 0
 		var collision := CollisionShape3D.new()
+		collision.name = "Collision"
 		var shape := BoxShape3D.new()
 		shape.size = size
 		collision.shape = shape
@@ -403,10 +327,11 @@ func _block(
 		body = static_body
 	else:
 		body = Node3D.new()
-	body.name = object_name
+	body.name = _unique_child_name(parent, object_name)
 	body.position = position
 	parent.add_child(body)
 	var mesh_instance := MeshInstance3D.new()
+	mesh_instance.name = "Mesh"
 	var mesh := BoxMesh.new()
 	mesh.size = size
 	mesh_instance.mesh = mesh
@@ -432,6 +357,7 @@ func _cylinder(
 		var static_body := StaticBody3D.new()
 		static_body.collision_layer = 1
 		var collision := CollisionShape3D.new()
+		collision.name = "Collision"
 		var shape := CylinderShape3D.new()
 		shape.radius = radius
 		shape.height = height
@@ -440,11 +366,12 @@ func _cylinder(
 		body = static_body
 	else:
 		body = Node3D.new()
-	body.name = object_name
+	body.name = _unique_child_name(parent, object_name)
 	body.position = position
 	body.rotation_degrees = rotation_degrees_value
 	parent.add_child(body)
 	var instance := MeshInstance3D.new()
+	instance.name = "Mesh"
 	var mesh := CylinderMesh.new()
 	mesh.top_radius = radius
 	mesh.bottom_radius = radius
@@ -466,7 +393,7 @@ func _sphere(
 	emission_energy: float = 0.0
 ) -> MeshInstance3D:
 	var instance := MeshInstance3D.new()
-	instance.name = object_name
+	instance.name = _unique_child_name(parent, object_name)
 	instance.position = position
 	var mesh := SphereMesh.new()
 	mesh.radius = radius
@@ -493,6 +420,7 @@ func _material(color: Color, metallic: float, roughness: float, emission_energy:
 
 func _add_light(position: Vector3, color: Color, energy: float, range_value: float) -> void:
 	var light := OmniLight3D.new()
+	light.name = _unique_child_name(_lights, "RoomLight")
 	light.position = position
 	light.light_color = color
 	light.light_energy = energy
@@ -504,6 +432,7 @@ func _add_light(position: Vector3, color: Color, energy: float, range_value: flo
 
 func _room_title(text: String, position: Vector3, rotation_value: Vector3, color: Color) -> void:
 	var label := Label3D.new()
+	label.name = _unique_child_name(_props, "RoomTitle")
 	label.text = text
 	label.position = position
 	label.rotation_degrees = rotation_value
@@ -527,3 +456,12 @@ func _raccoon_emblem(position: Vector3, rotation_value: Vector3, scale_value: fl
 		_sphere(root, "EyePatch", Vector3(x, 0.08, -0.58), 0.22, C_INK)
 		_sphere(root, "EyeGlow", Vector3(x, 0.08, -0.76), 0.065, C_CYAN, true, 2.0)
 	_sphere(root, "Nose", Vector3(0.0, -0.28, -0.68), 0.12, C_INK)
+
+
+func _unique_child_name(parent: Node, requested_name: String) -> String:
+	var candidate := requested_name
+	var suffix := 2
+	while parent.get_node_or_null(NodePath(candidate)) != null:
+		candidate = "%s%d" % [requested_name, suffix]
+		suffix += 1
+	return candidate

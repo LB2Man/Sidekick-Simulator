@@ -1,0 +1,489 @@
+[gd_scene format=3 uid="uid://dtju5fr2dwn8d"]
+
+[ext_resource type="Script" uid="uid://bv2pl7t6npcyl" path="res://scripts/interactable.gd" id="1_cqe65"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_20aj8"]
+size = Vector3(1.5, 3.1, 2.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24qn4"]
+albedo_color = Color(0.14509805, 0.19215687, 0.23529412, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_fv4k3"]
+size = Vector3(1.5, 3.1, 2.35)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nxlxb"]
+size = Vector3(1.5, 3.1, 2.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crfcn"]
+albedo_color = Color(0.14509805, 0.19215687, 0.23529412, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_djwft"]
+size = Vector3(1.5, 3.1, 2.35)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d2dgt"]
+size = Vector3(1.5, 3.1, 2.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crefh"]
+albedo_color = Color(0.14509805, 0.19215687, 0.23529412, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_pv2ct"]
+size = Vector3(1.5, 3.1, 2.35)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_84bho"]
+size = Vector3(1.5, 3.1, 2.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wsx5p"]
+albedo_color = Color(0.14509805, 0.19215687, 0.23529412, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_5vfox"]
+size = Vector3(1.5, 3.1, 2.35)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oqfxj"]
+size = Vector3(1.5, 3.1, 2.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_db30t"]
+albedo_color = Color(0.14509805, 0.19215687, 0.23529412, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_n1d0w"]
+size = Vector3(1.5, 3.1, 2.35)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e5tpv"]
+size = Vector3(1.5, 3.1, 2.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_urhrg"]
+albedo_color = Color(0.14509805, 0.19215687, 0.23529412, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_366p6"]
+size = Vector3(1.5, 3.1, 2.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmprh"]
+albedo_color = Color(0.06666667, 0.08235294, 0.11372549, 1)
+metallic = 0.15
+roughness = 0.35
+
+[sub_resource type="SphereMesh" id="SphereMesh_t0c1k"]
+radius = 0.28
+height = 0.56
+radial_segments = 16
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_keueq"]
+albedo_color = Color(0.16078432, 0.23137255, 0.28627452, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_tctvt"]
+size = Vector3(0.34, 1.25, 0.75)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fxu6j"]
+albedo_color = Color(0.2784314, 0.84313726, 0.9098039, 1)
+metallic = 0.22
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_75yoe"]
+size = Vector3(0.55, 1.25, 1.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3vdqo"]
+size = Vector3(0.55, 1.25, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ly07c"]
+albedo_color = Color(1, 0.8117647, 0.4, 1)
+emission_enabled = true
+emission = Color(1, 0.7254902, 0.21960784, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_yvchs"]
+radius = 0.075
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ovwo7"]
+albedo_color = Color(0.28235295, 0.44313726, 0.49019608, 1)
+metallic = 0.22
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_xdna4"]
+size = Vector3(0.55, 1.25, 1.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_smkst"]
+size = Vector3(0.55, 1.25, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkxxp"]
+albedo_color = Color(1, 0.8117647, 0.4, 1)
+emission_enabled = true
+emission = Color(1, 0.7254902, 0.21960784, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_286fx"]
+radius = 0.075
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vm3uu"]
+albedo_color = Color(0.32156864, 0.41960785, 0.5294118, 1)
+metallic = 0.22
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_1yp35"]
+size = Vector3(0.55, 1.25, 1.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1m7si"]
+size = Vector3(0.55, 1.25, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rcd7v"]
+albedo_color = Color(1, 0.8117647, 0.4, 1)
+emission_enabled = true
+emission = Color(1, 0.7254902, 0.21960784, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_ouhwy"]
+radius = 0.075
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nsk8w"]
+albedo_color = Color(0.84313726, 0.65882355, 0.29803923, 1)
+metallic = 0.22
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_s1l5t"]
+size = Vector3(0.55, 1.25, 1.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1jn6t"]
+size = Vector3(0.55, 1.25, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_on7d4"]
+albedo_color = Color(1, 0.8117647, 0.4, 1)
+emission_enabled = true
+emission = Color(1, 0.7254902, 0.21960784, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_5adka"]
+radius = 0.075
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70phg"]
+albedo_color = Color(0.7176471, 0.7647059, 0.79607844, 1)
+metallic = 0.22
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_o61lf"]
+size = Vector3(0.55, 1.25, 1.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bh1vr"]
+size = Vector3(0.55, 1.25, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ajih"]
+albedo_color = Color(1, 0.8117647, 0.4, 1)
+emission_enabled = true
+emission = Color(1, 0.7254902, 0.21960784, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_x1vhk"]
+radius = 0.075
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ra6xy"]
+albedo_color = Color(0.19607843, 0.30588236, 0.34901962, 1)
+metallic = 0.22
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_75kcb"]
+size = Vector3(0.55, 1.25, 1.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7owd2"]
+size = Vector3(0.55, 1.25, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jvw4w"]
+albedo_color = Color(1, 0.8117647, 0.4, 1)
+emission_enabled = true
+emission = Color(1, 0.7254902, 0.21960784, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_16wo5"]
+radius = 0.075
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[node name="SuitStation" type="Node3D" unique_id=681353123]
+
+[node name="Architecture" type="Node3D" parent="." unique_id=1251430215]
+
+[node name="Props" type="Node3D" parent="." unique_id=1650571451]
+
+[node name="SuitBay" type="StaticBody3D" parent="Props" unique_id=944646382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.8, 1.65, 9.6)
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape3D" parent="Props/SuitBay" unique_id=681940416]
+shape = SubResource("BoxShape3D_20aj8")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/SuitBay" unique_id=1070612976]
+material_override = SubResource("StandardMaterial3D_24qn4")
+mesh = SubResource("BoxMesh_fv4k3")
+
+[node name="SuitBay2" type="StaticBody3D" parent="Props" unique_id=1704879244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.8, 1.65, 12.7)
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape3D" parent="Props/SuitBay2" unique_id=387156186]
+shape = SubResource("BoxShape3D_nxlxb")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/SuitBay2" unique_id=2037572177]
+material_override = SubResource("StandardMaterial3D_crfcn")
+mesh = SubResource("BoxMesh_djwft")
+
+[node name="SuitBay3" type="StaticBody3D" parent="Props" unique_id=1598743195]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.8, 1.65, 15.8)
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape3D" parent="Props/SuitBay3" unique_id=1061214790]
+shape = SubResource("BoxShape3D_d2dgt")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/SuitBay3" unique_id=1827919414]
+material_override = SubResource("StandardMaterial3D_crefh")
+mesh = SubResource("BoxMesh_pv2ct")
+
+[node name="SuitBay4" type="StaticBody3D" parent="Props" unique_id=813522847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.8, 1.65, 18.9)
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape3D" parent="Props/SuitBay4" unique_id=1313682345]
+shape = SubResource("BoxShape3D_84bho")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/SuitBay4" unique_id=2037513165]
+material_override = SubResource("StandardMaterial3D_wsx5p")
+mesh = SubResource("BoxMesh_5vfox")
+
+[node name="SuitBay5" type="StaticBody3D" parent="Props" unique_id=1231894516]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.8, 1.65, 22)
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape3D" parent="Props/SuitBay5" unique_id=526635599]
+shape = SubResource("BoxShape3D_oqfxj")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/SuitBay5" unique_id=1456822601]
+material_override = SubResource("StandardMaterial3D_db30t")
+mesh = SubResource("BoxMesh_n1d0w")
+
+[node name="SuitBay6" type="StaticBody3D" parent="Props" unique_id=331353486]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.8, 1.65, 25.1)
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape3D" parent="Props/SuitBay6" unique_id=330486434]
+shape = SubResource("BoxShape3D_e5tpv")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/SuitBay6" unique_id=842832620]
+material_override = SubResource("StandardMaterial3D_urhrg")
+mesh = SubResource("BoxMesh_366p6")
+
+[node name="SuitHead" type="MeshInstance3D" parent="Props" unique_id=1924160310]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.35, 2.55, 25.1)
+material_override = SubResource("StandardMaterial3D_xmprh")
+mesh = SubResource("SphereMesh_t0c1k")
+
+[node name="SuitBody" type="Node3D" parent="Props" unique_id=783130245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.38, 1.72, 25.1)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/SuitBody" unique_id=1227623770]
+material_override = SubResource("StandardMaterial3D_keueq")
+mesh = SubResource("BoxMesh_tctvt")
+
+[node name="Interactables" type="Node3D" parent="." unique_id=1320981936]
+
+[node name="Interactable_suit_inspect" type="StaticBody3D" parent="Interactables" unique_id=454856565]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.95, 1.7, 9.6)
+script = ExtResource("1_cqe65")
+action_id = "suit_inspect"
+display_name = "Inspection scanner"
+interaction_hint = "Scan suit with"
+room_name = "WORKSHOP"
+
+[node name="Object" type="MeshInstance3D" parent="Interactables/Interactable_suit_inspect" unique_id=641205184]
+material_override = SubResource("StandardMaterial3D_fxu6j")
+mesh = SubResource("BoxMesh_75yoe")
+
+[node name="@CollisionShape3D@19811" type="CollisionShape3D" parent="Interactables/Interactable_suit_inspect" unique_id=816637683]
+shape = SubResource("BoxShape3D_3vdqo")
+
+[node name="InteractionBadge" type="MeshInstance3D" parent="Interactables/Interactable_suit_inspect" unique_id=1222795791]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.865, 0)
+material_override = SubResource("StandardMaterial3D_ly07c")
+mesh = SubResource("SphereMesh_yvchs")
+
+[node name="ObjectLabel" type="Label3D" parent="Interactables/Interactable_suit_inspect" unique_id=1104664573]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.085, 0)
+billboard = 1
+modulate = Color(1, 0.90588236, 0.68235296, 1)
+outline_modulate = Color(0.09019608, 0.06666667, 0.09803922, 0.8627451)
+text = "INSPECTION SCANNER"
+font_size = 22
+outline_size = 8
+
+[node name="Interactable_suit_wash" type="StaticBody3D" parent="Interactables" unique_id=139903029]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.95, 1.7, 12.7)
+script = ExtResource("1_cqe65")
+action_id = "suit_wash"
+display_name = "Suit washer"
+interaction_hint = "Wash suit in"
+room_name = "WORKSHOP"
+
+[node name="Object" type="MeshInstance3D" parent="Interactables/Interactable_suit_wash" unique_id=1461757693]
+material_override = SubResource("StandardMaterial3D_ovwo7")
+mesh = SubResource("BoxMesh_xdna4")
+
+[node name="@CollisionShape3D@19812" type="CollisionShape3D" parent="Interactables/Interactable_suit_wash" unique_id=1283540605]
+shape = SubResource("BoxShape3D_smkst")
+
+[node name="InteractionBadge" type="MeshInstance3D" parent="Interactables/Interactable_suit_wash" unique_id=2077233731]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.865, 0)
+material_override = SubResource("StandardMaterial3D_jkxxp")
+mesh = SubResource("SphereMesh_286fx")
+
+[node name="ObjectLabel" type="Label3D" parent="Interactables/Interactable_suit_wash" unique_id=387848839]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.085, 0)
+billboard = 1
+modulate = Color(1, 0.90588236, 0.68235296, 1)
+outline_modulate = Color(0.09019608, 0.06666667, 0.09803922, 0.8627451)
+text = "SUIT WASHER"
+font_size = 22
+outline_size = 8
+
+[node name="Interactable_suit_dry" type="StaticBody3D" parent="Interactables" unique_id=2064414838]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.95, 1.7, 15.8)
+script = ExtResource("1_cqe65")
+action_id = "suit_dry"
+display_name = "Ion drying chamber"
+interaction_hint = "Dry suit in"
+room_name = "WORKSHOP"
+
+[node name="Object" type="MeshInstance3D" parent="Interactables/Interactable_suit_dry" unique_id=1961613184]
+material_override = SubResource("StandardMaterial3D_vm3uu")
+mesh = SubResource("BoxMesh_1yp35")
+
+[node name="@CollisionShape3D@19813" type="CollisionShape3D" parent="Interactables/Interactable_suit_dry" unique_id=2087135385]
+shape = SubResource("BoxShape3D_1m7si")
+
+[node name="InteractionBadge" type="MeshInstance3D" parent="Interactables/Interactable_suit_dry" unique_id=762407450]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.865, 0)
+material_override = SubResource("StandardMaterial3D_rcd7v")
+mesh = SubResource("SphereMesh_ouhwy")
+
+[node name="ObjectLabel" type="Label3D" parent="Interactables/Interactable_suit_dry" unique_id=2008317829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.085, 0)
+billboard = 1
+modulate = Color(1, 0.90588236, 0.68235296, 1)
+outline_modulate = Color(0.09019608, 0.06666667, 0.09803922, 0.8627451)
+text = "ION DRYING CHAMBER"
+font_size = 22
+outline_size = 8
+
+[node name="Interactable_suit_repair" type="StaticBody3D" parent="Interactables" unique_id=488450181]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.95, 1.7, 18.9)
+script = ExtResource("1_cqe65")
+action_id = "suit_repair"
+display_name = "Ballistic repair bench"
+interaction_hint = "Patch tear at"
+room_name = "WORKSHOP"
+
+[node name="Object" type="MeshInstance3D" parent="Interactables/Interactable_suit_repair" unique_id=1530754851]
+material_override = SubResource("StandardMaterial3D_nsk8w")
+mesh = SubResource("BoxMesh_s1l5t")
+
+[node name="@CollisionShape3D@19814" type="CollisionShape3D" parent="Interactables/Interactable_suit_repair" unique_id=1082100549]
+shape = SubResource("BoxShape3D_1jn6t")
+
+[node name="InteractionBadge" type="MeshInstance3D" parent="Interactables/Interactable_suit_repair" unique_id=1558035405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.865, 0)
+material_override = SubResource("StandardMaterial3D_on7d4")
+mesh = SubResource("SphereMesh_5adka")
+
+[node name="ObjectLabel" type="Label3D" parent="Interactables/Interactable_suit_repair" unique_id=1611687211]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.085, 0)
+billboard = 1
+modulate = Color(1, 0.90588236, 0.68235296, 1)
+outline_modulate = Color(0.09019608, 0.06666667, 0.09803922, 0.8627451)
+text = "BALLISTIC REPAIR BENCH"
+font_size = 22
+outline_size = 8
+
+[node name="Interactable_suit_polish" type="StaticBody3D" parent="Interactables" unique_id=1652958793]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.95, 1.7, 22)
+script = ExtResource("1_cqe65")
+action_id = "suit_polish"
+display_name = "Emblem polishing wheel"
+interaction_hint = "Polish at"
+room_name = "WORKSHOP"
+
+[node name="Object" type="MeshInstance3D" parent="Interactables/Interactable_suit_polish" unique_id=350144903]
+material_override = SubResource("StandardMaterial3D_70phg")
+mesh = SubResource("BoxMesh_o61lf")
+
+[node name="@CollisionShape3D@19815" type="CollisionShape3D" parent="Interactables/Interactable_suit_polish" unique_id=1809364176]
+shape = SubResource("BoxShape3D_bh1vr")
+
+[node name="InteractionBadge" type="MeshInstance3D" parent="Interactables/Interactable_suit_polish" unique_id=2138489864]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.865, 0)
+material_override = SubResource("StandardMaterial3D_7ajih")
+mesh = SubResource("SphereMesh_x1vhk")
+
+[node name="ObjectLabel" type="Label3D" parent="Interactables/Interactable_suit_polish" unique_id=129903412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.085, 0)
+billboard = 1
+modulate = Color(1, 0.90588236, 0.68235296, 1)
+outline_modulate = Color(0.09019608, 0.06666667, 0.09803922, 0.8627451)
+text = "EMBLEM POLISHING WHEEL"
+font_size = 22
+outline_size = 8
+
+[node name="Interactable_suit_display" type="StaticBody3D" parent="Interactables" unique_id=2017648732]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.95, 1.7, 25.1)
+script = ExtResource("1_cqe65")
+action_id = "suit_display"
+display_name = "Suit display cradle"
+interaction_hint = "Return suit to"
+room_name = "WORKSHOP"
+
+[node name="Object" type="MeshInstance3D" parent="Interactables/Interactable_suit_display" unique_id=1044679863]
+material_override = SubResource("StandardMaterial3D_ra6xy")
+mesh = SubResource("BoxMesh_75kcb")
+
+[node name="@CollisionShape3D@19816" type="CollisionShape3D" parent="Interactables/Interactable_suit_display" unique_id=257085598]
+shape = SubResource("BoxShape3D_7owd2")
+
+[node name="InteractionBadge" type="MeshInstance3D" parent="Interactables/Interactable_suit_display" unique_id=1095062497]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.865, 0)
+material_override = SubResource("StandardMaterial3D_jvw4w")
+mesh = SubResource("SphereMesh_16wo5")
+
+[node name="ObjectLabel" type="Label3D" parent="Interactables/Interactable_suit_display" unique_id=37742532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.085, 0)
+billboard = 1
+modulate = Color(1, 0.90588236, 0.68235296, 1)
+outline_modulate = Color(0.09019608, 0.06666667, 0.09803922, 0.8627451)
+text = "SUIT DISPLAY CRADLE"
+font_size = 22
+outline_size = 8
+
+[node name="Lighting" type="Node3D" parent="." unique_id=709855226]
+
+[node name="RoomLight" type="OmniLight3D" parent="Lighting" unique_id=948565727]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 3.2, 24)
+light_color = Color(0.9647059, 0.78431374, 0.4745098, 1)
+light_energy = 1.4
+shadow_enabled = true
+omni_range = 6.0
+omni_attenuation = 1.1

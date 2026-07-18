@@ -6,7 +6,7 @@ You are the trusted butler to the theatrical superhero Raccoon Man. Explore his 
 
 ## Play
 
-Open `project.godot` in Godot 4.7 and press **F6/F5**. The complete map is available as normal editable nodes in `scenes/mansion_world.tscn`; it is instanced into `main.tscn` with editable children enabled.
+Open `project.godot` in Godot 4.7 and press **F6/F5**. The complete map is the editor-authored `scenes/mansion_world.tscn`, composed from independent editable scenes under `scenes/world/` and `scenes/stations/`. No geometry is generated when the game runs.
 
 | Input | Action |
 | --- | --- |
@@ -38,11 +38,25 @@ Jobs use reusable data-driven step definitions, persistent progression, deadline
 ## Architecture
 
 - `scripts/main.gd` — session orchestration, clock, save/load, dialogue
-- `scripts/task_manager.gd` — data-driven jobs, steps, rewards, deadlines
-- `scenes/mansion_world.tscn` — baked, editor-editable rooms, lights, props, and stations
-- `scripts/world_builder.gd` — source builder retained for intentional world rebakes
+- `scripts/task_manager.gd` — shared progression, rewards, deadlines, and persistence
+- `scripts/tasks/` — one data module per job, including steps, messages, and minigames
+- `scenes/mansion_world.tscn` — editable map composition used at runtime
+- `scenes/world/` — editable shared shell and lobby scenes
+- `scenes/stations/` — one editable map scene per job station
+- `scripts/mansion_world.gd` — interaction indexing for the authored map; no geometry generation
 - `scripts/player_controller.gd` — first-person movement, crouch, sprint, interaction ray
 - `scripts/interactable.gd` — reusable contextual world objects
 - `scripts/butler_hud.gd` — HUD, task board, pause/settings, minigames
 - `scripts/minimap.gd` — live floorplan, player heading, objective markers
-- `tools/bake_world.gd` — regenerates the editable world scene when explicitly run
+- `scripts/world_builder.gd`, `scripts/world/`, and `tools/bake_world.gd` — optional legacy rebake tooling; not used by gameplay
+
+## Parallel task development
+
+Each job owns two files: its task definition and its world station. For example:
+
+| Job | Task logic and dialogue | Editable map scene |
+| --- | --- | --- |
+| Bath | `scripts/tasks/bath_task.gd` | `scenes/stations/bath_station.tscn` |
+| Car | `scripts/tasks/car_task.gd` | `scenes/stations/car_station.tscn` |
+
+Bath and car branches can therefore be developed, tested, and committed without touching the same files. Open the appropriate station scene directly in Godot and edit its nodes normally. Change `task_manager.gd` or `scenes/mansion_world.tscn` only for behavior or composition shared by every job. The rebake tool overwrites station scenes, so use it only when intentionally recreating the native-mesh templates—not during ordinary map editing.

@@ -1,0 +1,619 @@
+[gd_scene format=3 uid="uid://5s5g2v548my7"]
+
+[ext_resource type="Script" uid="uid://bv2pl7t6npcyl" path="res://scripts/interactable.gd" id="1_inxl1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pydjt"]
+size = Vector3(4.8, 0.85, 8.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t2t06"]
+albedo_color = Color(0.09019608, 0.15294118, 0.20784314, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_meh5t"]
+size = Vector3(4.8, 0.85, 8.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_co0yy"]
+size = Vector3(3.6, 0.85, 3.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kursc"]
+albedo_color = Color(0.12941177, 0.24313726, 0.29803923, 1)
+roughness = 0.78
+
+[sub_resource type="BoxMesh" id="BoxMesh_fcw6i"]
+size = Vector3(3.6, 0.85, 3.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_745yf"]
+albedo_color = Color(0.3019608, 0.72156864, 0.75686276, 1)
+metallic = 0.18
+roughness = 0.78
+emission_enabled = true
+emission = Color(0.3019608, 0.72156864, 0.75686276, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2ossk"]
+size = Vector3(3.2, 0.45, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbfs3"]
+albedo_color = Color(0.84313726, 0.65882355, 0.29803923, 1)
+metallic = 0.18
+roughness = 0.78
+emission_enabled = true
+emission = Color(0.84313726, 0.65882355, 0.29803923, 1)
+emission_energy_multiplier = 1.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_md1jv"]
+size = Vector3(0.42, 0.06, 3.4)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_x7hsv"]
+height = 0.48
+radius = 0.72
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_72vaj"]
+albedo_color = Color(0.06666667, 0.08235294, 0.11372549, 1)
+metallic = 0.3
+roughness = 0.45
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5lpnj"]
+top_radius = 0.72
+bottom_radius = 0.72
+height = 0.48
+radial_segments = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5podb"]
+albedo_color = Color(0.84313726, 0.65882355, 0.29803923, 1)
+metallic = 0.3
+roughness = 0.45
+emission_enabled = true
+emission = Color(0.84313726, 0.65882355, 0.29803923, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_o0jk6"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.52
+radial_segments = 20
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_h3xmo"]
+height = 0.48
+radius = 0.72
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2pwre"]
+albedo_color = Color(0.06666667, 0.08235294, 0.11372549, 1)
+metallic = 0.3
+roughness = 0.45
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uh8xh"]
+top_radius = 0.72
+bottom_radius = 0.72
+height = 0.48
+radial_segments = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yh0ve"]
+albedo_color = Color(0.84313726, 0.65882355, 0.29803923, 1)
+metallic = 0.3
+roughness = 0.45
+emission_enabled = true
+emission = Color(0.84313726, 0.65882355, 0.29803923, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5k6ec"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.52
+radial_segments = 20
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_b6pa1"]
+height = 0.48
+radius = 0.72
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32j2b"]
+albedo_color = Color(0.06666667, 0.08235294, 0.11372549, 1)
+metallic = 0.3
+roughness = 0.45
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a2wof"]
+top_radius = 0.72
+bottom_radius = 0.72
+height = 0.48
+radial_segments = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wkojs"]
+albedo_color = Color(0.84313726, 0.65882355, 0.29803923, 1)
+metallic = 0.3
+roughness = 0.45
+emission_enabled = true
+emission = Color(0.84313726, 0.65882355, 0.29803923, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4okwk"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.52
+radial_segments = 20
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gft6t"]
+height = 0.48
+radius = 0.72
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yxeco"]
+albedo_color = Color(0.06666667, 0.08235294, 0.11372549, 1)
+metallic = 0.3
+roughness = 0.45
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pq5di"]
+top_radius = 0.72
+bottom_radius = 0.72
+height = 0.48
+radial_segments = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aayy4"]
+albedo_color = Color(0.84313726, 0.65882355, 0.29803923, 1)
+metallic = 0.3
+roughness = 0.45
+emission_enabled = true
+emission = Color(0.84313726, 0.65882355, 0.29803923, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qs00p"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.52
+radial_segments = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ej4wq"]
+albedo_color = Color(0.2784314, 0.84313726, 0.9098039, 1)
+metallic = 0.15
+roughness = 0.35
+emission_enabled = true
+emission = Color(0.2784314, 0.84313726, 0.9098039, 1)
+emission_energy_multiplier = 2.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_cuim1"]
+radius = 0.23
+height = 0.46
+radial_segments = 16
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ftkce"]
+albedo_color = Color(0.2784314, 0.84313726, 0.9098039, 1)
+metallic = 0.15
+roughness = 0.35
+emission_enabled = true
+emission = Color(0.2784314, 0.84313726, 0.9098039, 1)
+emission_energy_multiplier = 2.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_argwn"]
+radius = 0.23
+height = 0.46
+radial_segments = 16
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gnq7i"]
+albedo_color = Color(0.84313726, 0.65882355, 0.29803923, 1)
+metallic = 0.18
+roughness = 0.78
+emission_enabled = true
+emission = Color(0.84313726, 0.65882355, 0.29803923, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_06o7w"]
+size = Vector3(0.16, 0.08, 16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tljpm"]
+albedo_color = Color(0.84313726, 0.65882355, 0.29803923, 1)
+metallic = 0.18
+roughness = 0.78
+emission_enabled = true
+emission = Color(0.84313726, 0.65882355, 0.29803923, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tg203"]
+size = Vector3(0.16, 0.08, 16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uao5h"]
+albedo_color = Color(0.84313726, 0.65882355, 0.29803923, 1)
+metallic = 0.18
+roughness = 0.78
+emission_enabled = true
+emission = Color(0.84313726, 0.65882355, 0.29803923, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_oiqol"]
+size = Vector3(13.6, 0.08, 0.16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8l8a"]
+albedo_color = Color(0.84313726, 0.65882355, 0.29803923, 1)
+metallic = 0.18
+roughness = 0.78
+emission_enabled = true
+emission = Color(0.84313726, 0.65882355, 0.29803923, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hsu4i"]
+size = Vector3(13.6, 0.08, 0.16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fb361"]
+albedo_color = Color(0.27058825, 0.32156864, 0.35686275, 1)
+metallic = 0.22
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_ncpij"]
+size = Vector3(1, 2.1, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_11jes"]
+size = Vector3(1, 2.1, 0.9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dq5nl"]
+albedo_color = Color(1, 0.8117647, 0.4, 1)
+emission_enabled = true
+emission = Color(1, 0.7254902, 0.21960784, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_evf8i"]
+radius = 0.075
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_psxpr"]
+albedo_color = Color(0.19215687, 0.36862746, 0.40784314, 1)
+metallic = 0.22
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_mnu64"]
+size = Vector3(1.25, 1.1, 0.55)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4t4pe"]
+size = Vector3(1.25, 1.1, 0.55)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4v5e"]
+albedo_color = Color(1, 0.8117647, 0.4, 1)
+emission_enabled = true
+emission = Color(1, 0.7254902, 0.21960784, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_kxx0k"]
+radius = 0.075
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oe6cb"]
+albedo_color = Color(0.16470589, 0.4745098, 0.5137255, 1)
+metallic = 0.22
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_n5pik"]
+size = Vector3(1.25, 1.1, 0.55)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6xkmp"]
+size = Vector3(1.25, 1.1, 0.55)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyhny"]
+albedo_color = Color(1, 0.8117647, 0.4, 1)
+emission_enabled = true
+emission = Color(1, 0.7254902, 0.21960784, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_kkk8h"]
+radius = 0.075
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5hjo"]
+albedo_color = Color(0.84313726, 0.65882355, 0.29803923, 1)
+metallic = 0.22
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_v4div"]
+size = Vector3(2, 0.34, 1.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uic0p"]
+size = Vector3(2, 0.34, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_euwnn"]
+albedo_color = Color(1, 0.8117647, 0.4, 1)
+emission_enabled = true
+emission = Color(1, 0.7254902, 0.21960784, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_bsebb"]
+radius = 0.075
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[node name="CarStation" type="Node3D" unique_id=1880375834]
+
+[node name="Architecture" type="Node3D" parent="." unique_id=1457932270]
+
+[node name="Props" type="Node3D" parent="." unique_id=1253888773]
+
+[node name="RoomTitle" type="Label3D" parent="Props" unique_id=2017208409]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 3.25, 27.68)
+modulate = Color(0.2784314, 0.84313726, 0.9098039, 1)
+outline_modulate = Color(0.03529412, 0.043137256, 0.06666667, 0.9098039)
+text = "RACCOON ROADSTER BAY"
+font_size = 34
+outline_size = 10
+
+[node name="RoadsterBody" type="StaticBody3D" parent="Props" unique_id=849431799]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83, 18)
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape3D" parent="Props/RoadsterBody" unique_id=511326951]
+shape = SubResource("BoxShape3D_pydjt")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/RoadsterBody" unique_id=543228109]
+material_override = SubResource("StandardMaterial3D_t2t06")
+mesh = SubResource("BoxMesh_meh5t")
+
+[node name="RoadsterCab" type="StaticBody3D" parent="Props" unique_id=583342539]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 17.3)
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape3D" parent="Props/RoadsterCab" unique_id=90925452]
+shape = SubResource("BoxShape3D_co0yy")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/RoadsterCab" unique_id=1139104447]
+material_override = SubResource("StandardMaterial3D_kursc")
+mesh = SubResource("BoxMesh_fcw6i")
+
+[node name="Windshield" type="Node3D" parent="Props" unique_id=2035417084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.74, 15.48)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/Windshield" unique_id=1675168942]
+material_override = SubResource("StandardMaterial3D_745yf")
+mesh = SubResource("BoxMesh_2ossk")
+
+[node name="RoadsterStripe" type="Node3D" parent="Props" unique_id=253433886]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28, 20.4)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/RoadsterStripe" unique_id=1945439623]
+material_override = SubResource("StandardMaterial3D_sbfs3")
+mesh = SubResource("BoxMesh_md1jv")
+
+[node name="RoadsterWheel" type="StaticBody3D" parent="Props" unique_id=1972164702]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -2.25, 0.65, 15.7)
+
+[node name="Collision" type="CollisionShape3D" parent="Props/RoadsterWheel" unique_id=872268502]
+shape = SubResource("CylinderShape3D_x7hsv")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/RoadsterWheel" unique_id=1049299624]
+material_override = SubResource("StandardMaterial3D_72vaj")
+mesh = SubResource("CylinderMesh_5lpnj")
+
+[node name="WheelHub" type="Node3D" parent="Props" unique_id=1176072220]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -2.2725, 0.65, 15.7)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/WheelHub" unique_id=380553391]
+material_override = SubResource("StandardMaterial3D_5podb")
+mesh = SubResource("CylinderMesh_o0jk6")
+
+[node name="RoadsterWheel2" type="StaticBody3D" parent="Props" unique_id=892200152]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -2.25, 0.65, 20.2)
+
+[node name="Collision" type="CollisionShape3D" parent="Props/RoadsterWheel2" unique_id=1868829031]
+shape = SubResource("CylinderShape3D_h3xmo")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/RoadsterWheel2" unique_id=1145322939]
+material_override = SubResource("StandardMaterial3D_2pwre")
+mesh = SubResource("CylinderMesh_uh8xh")
+
+[node name="WheelHub2" type="Node3D" parent="Props" unique_id=273921299]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -2.2725, 0.65, 20.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/WheelHub2" unique_id=2055018285]
+material_override = SubResource("StandardMaterial3D_yh0ve")
+mesh = SubResource("CylinderMesh_5k6ec")
+
+[node name="RoadsterWheel3" type="StaticBody3D" parent="Props" unique_id=1011578496]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 2.25, 0.65, 15.7)
+
+[node name="Collision" type="CollisionShape3D" parent="Props/RoadsterWheel3" unique_id=1776243378]
+shape = SubResource("CylinderShape3D_b6pa1")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/RoadsterWheel3" unique_id=1658537643]
+material_override = SubResource("StandardMaterial3D_32j2b")
+mesh = SubResource("CylinderMesh_a2wof")
+
+[node name="WheelHub3" type="Node3D" parent="Props" unique_id=1218849966]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 2.2725, 0.65, 15.7)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/WheelHub3" unique_id=151395912]
+material_override = SubResource("StandardMaterial3D_wkojs")
+mesh = SubResource("CylinderMesh_4okwk")
+
+[node name="RoadsterWheel4" type="StaticBody3D" parent="Props" unique_id=1149590338]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 2.25, 0.65, 20.2)
+
+[node name="Collision" type="CollisionShape3D" parent="Props/RoadsterWheel4" unique_id=947738679]
+shape = SubResource("CylinderShape3D_gft6t")
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/RoadsterWheel4" unique_id=1377621771]
+material_override = SubResource("StandardMaterial3D_yxeco")
+mesh = SubResource("CylinderMesh_pq5di")
+
+[node name="WheelHub4" type="Node3D" parent="Props" unique_id=531069628]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 2.2725, 0.65, 20.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/WheelHub4" unique_id=906795416]
+material_override = SubResource("StandardMaterial3D_aayy4")
+mesh = SubResource("CylinderMesh_qs00p")
+
+[node name="Headlight" type="MeshInstance3D" parent="Props" unique_id=823958346]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35, 1, 13.66)
+material_override = SubResource("StandardMaterial3D_ej4wq")
+mesh = SubResource("SphereMesh_cuim1")
+
+[node name="Headlight2" type="MeshInstance3D" parent="Props" unique_id=1445892519]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, 1, 13.66)
+material_override = SubResource("StandardMaterial3D_ftkce")
+mesh = SubResource("SphereMesh_argwn")
+
+[node name="HazardLine" type="Node3D" parent="Props" unique_id=2142047344]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8, 0.09, 18)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/HazardLine" unique_id=442907266]
+material_override = SubResource("StandardMaterial3D_gnq7i")
+mesh = SubResource("BoxMesh_06o7w")
+
+[node name="HazardLine2" type="Node3D" parent="Props" unique_id=1417355471]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8, 0.09, 18)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/HazardLine2" unique_id=644604786]
+material_override = SubResource("StandardMaterial3D_tljpm")
+mesh = SubResource("BoxMesh_tg203")
+
+[node name="HazardLine3" type="Node3D" parent="Props" unique_id=1165600311]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 9)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/HazardLine3" unique_id=625178437]
+material_override = SubResource("StandardMaterial3D_uao5h")
+mesh = SubResource("BoxMesh_oiqol")
+
+[node name="HazardLine4" type="Node3D" parent="Props" unique_id=164116325]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 26)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/HazardLine4" unique_id=472018242]
+material_override = SubResource("StandardMaterial3D_e8l8a")
+mesh = SubResource("BoxMesh_hsu4i")
+
+[node name="Interactables" type="Node3D" parent="." unique_id=2109997669]
+
+[node name="Interactable_car_refuel" type="StaticBody3D" parent="Interactables" unique_id=2121610872]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8, 1.05, 20.7)
+script = ExtResource("1_inxl1")
+action_id = "car_refuel"
+display_name = "Stealth-fuel pump"
+interaction_hint = "Refuel from"
+room_name = "GARAGE"
+
+[node name="Object" type="MeshInstance3D" parent="Interactables/Interactable_car_refuel" unique_id=272127113]
+material_override = SubResource("StandardMaterial3D_fb361")
+mesh = SubResource("BoxMesh_ncpij")
+
+[node name="@CollisionShape3D@19817" type="CollisionShape3D" parent="Interactables/Interactable_car_refuel" unique_id=1962336187]
+shape = SubResource("BoxShape3D_11jes")
+
+[node name="InteractionBadge" type="MeshInstance3D" parent="Interactables/Interactable_car_refuel" unique_id=1031722965]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29, 0)
+material_override = SubResource("StandardMaterial3D_dq5nl")
+mesh = SubResource("SphereMesh_evf8i")
+
+[node name="ObjectLabel" type="Label3D" parent="Interactables/Interactable_car_refuel" unique_id=970788707]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51, 0)
+billboard = 1
+modulate = Color(1, 0.90588236, 0.68235296, 1)
+outline_modulate = Color(0.09019608, 0.06666667, 0.09803922, 0.8627451)
+text = "STEALTH-FUEL PUMP"
+font_size = 22
+outline_size = 8
+
+[node name="Interactable_car_tires" type="StaticBody3D" parent="Interactables" unique_id=187368937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9, 0.78, 16)
+script = ExtResource("1_inxl1")
+action_id = "car_tires"
+display_name = "Tire console"
+interaction_hint = "Set tire pressure at"
+room_name = "GARAGE"
+
+[node name="Object" type="MeshInstance3D" parent="Interactables/Interactable_car_tires" unique_id=487664316]
+material_override = SubResource("StandardMaterial3D_psxpr")
+mesh = SubResource("BoxMesh_mnu64")
+
+[node name="@CollisionShape3D@19818" type="CollisionShape3D" parent="Interactables/Interactable_car_tires" unique_id=802953618]
+shape = SubResource("BoxShape3D_4t4pe")
+
+[node name="InteractionBadge" type="MeshInstance3D" parent="Interactables/Interactable_car_tires" unique_id=1184012842]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79, 0)
+material_override = SubResource("StandardMaterial3D_x4v5e")
+mesh = SubResource("SphereMesh_kxx0k")
+
+[node name="ObjectLabel" type="Label3D" parent="Interactables/Interactable_car_tires" unique_id=2046976637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01, 0)
+billboard = 1
+modulate = Color(1, 0.90588236, 0.68235296, 1)
+outline_modulate = Color(0.09019608, 0.06666667, 0.09803922, 0.8627451)
+text = "TIRE CONSOLE"
+font_size = 22
+outline_size = 8
+
+[node name="Interactable_car_clean" type="StaticBody3D" parent="Interactables" unique_id=438300149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9, 0.78, 20)
+script = ExtResource("1_inxl1")
+action_id = "car_clean"
+display_name = "Roadster wash controls"
+interaction_hint = "Clean car using"
+room_name = "GARAGE"
+
+[node name="Object" type="MeshInstance3D" parent="Interactables/Interactable_car_clean" unique_id=64141715]
+material_override = SubResource("StandardMaterial3D_oe6cb")
+mesh = SubResource("BoxMesh_n5pik")
+
+[node name="@CollisionShape3D@19819" type="CollisionShape3D" parent="Interactables/Interactable_car_clean" unique_id=1600254218]
+shape = SubResource("BoxShape3D_6xkmp")
+
+[node name="InteractionBadge" type="MeshInstance3D" parent="Interactables/Interactable_car_clean" unique_id=987377636]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79, 0)
+material_override = SubResource("StandardMaterial3D_wyhny")
+mesh = SubResource("SphereMesh_kkk8h")
+
+[node name="ObjectLabel" type="Label3D" parent="Interactables/Interactable_car_clean" unique_id=1426472842]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01, 0)
+billboard = 1
+modulate = Color(1, 0.90588236, 0.68235296, 1)
+outline_modulate = Color(0.09019608, 0.06666667, 0.09803922, 0.8627451)
+text = "ROADSTER WASH CONTROLS"
+font_size = 22
+outline_size = 8
+
+[node name="Interactable_car_load" type="StaticBody3D" parent="Interactables" unique_id=2017291793]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42, 21.5)
+script = ExtResource("1_inxl1")
+action_id = "car_load"
+display_name = "Smoke-acorn trunk"
+interaction_hint = "Load gadgets into"
+room_name = "GARAGE"
+
+[node name="Object" type="MeshInstance3D" parent="Interactables/Interactable_car_load" unique_id=1447956337]
+material_override = SubResource("StandardMaterial3D_c5hjo")
+mesh = SubResource("BoxMesh_v4div")
+
+[node name="@CollisionShape3D@19820" type="CollisionShape3D" parent="Interactables/Interactable_car_load" unique_id=979444332]
+shape = SubResource("BoxShape3D_uic0p")
+
+[node name="InteractionBadge" type="MeshInstance3D" parent="Interactables/Interactable_car_load" unique_id=736661692]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41, 0)
+material_override = SubResource("StandardMaterial3D_euwnn")
+mesh = SubResource("SphereMesh_bsebb")
+
+[node name="ObjectLabel" type="Label3D" parent="Interactables/Interactable_car_load" unique_id=110399200]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63, 0)
+billboard = 1
+modulate = Color(1, 0.90588236, 0.68235296, 1)
+outline_modulate = Color(0.09019608, 0.06666667, 0.09803922, 0.8627451)
+text = "SMOKE-ACORN TRUNK"
+font_size = 22
+outline_size = 8
+
+[node name="Lighting" type="Node3D" parent="." unique_id=1672971920]
+
+[node name="RoomLight" type="OmniLight3D" parent="Lighting" unique_id=96789149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 12.9)
+light_color = Color(0.2784314, 0.84313726, 0.9098039, 1)
+shadow_enabled = true
+omni_range = 7.0
+omni_attenuation = 1.1
+
+[node name="RoomLight2" type="OmniLight3D" parent="Lighting" unique_id=416940972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.75, 18)
+light_color = Color(0.4745098, 0.8627451, 0.9098039, 1)
+light_energy = 2.3
+shadow_enabled = true
+omni_range = 12.5
+omni_attenuation = 1.1
+
+[node name="RoomLight3" type="OmniLight3D" parent="Lighting" unique_id=726666277]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.75, 25)
+light_color = Color(0.47058824, 0.7254902, 0.84705883, 1)
+light_energy = 1.5
+shadow_enabled = true
+omni_range = 8.0
+omni_attenuation = 1.1

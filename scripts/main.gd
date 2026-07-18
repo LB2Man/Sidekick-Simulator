@@ -53,8 +53,7 @@ func _build_game() -> void:
 
 	_world = get_node_or_null("MansionAndLair")
 	if _world == null:
-		# Fallback for isolated script tests; the shipped main scene already
-		# contains the editable world instance.
+		# Fallback for isolated script tests; the main scene normally contains it.
 		_world = MansionWorldScene.instantiate()
 		add_child(_world)
 	_world.action_requested.connect(_on_action_requested)
@@ -102,7 +101,11 @@ func _on_action_requested(action_id: String, _object_name: String) -> void:
 			_world.set_action_completed(action_id)
 			_hud.show_toast(str(result.message), 4.2, true)
 			if not bool(result.get("task_finished", false)):
-				_hud.show_subtitle("H.A.R.O.L.D.", _ai_confirmation(action_id), 4.0)
+				_hud.show_subtitle(
+					"H.A.R.O.L.D.",
+					str(result.get("ai_confirmation", "Step logged. Your efficiency remains suspiciously comforting.")),
+					4.0
+				)
 			save_game(true)
 		_:
 			_hud.show_toast(str(result.get("message", "That is not ready yet.")), 3.0)
@@ -114,7 +117,11 @@ func _on_minigame_succeeded(action_id: String) -> void:
 		_world.set_action_completed(action_id)
 		_hud.show_toast(str(result.message), 4.2, true)
 		if not bool(result.get("task_finished", false)):
-			_hud.show_subtitle("H.A.R.O.L.D.", _ai_confirmation(action_id), 4.0)
+			_hud.show_subtitle(
+				"H.A.R.O.L.D.",
+				str(result.get("ai_confirmation", "Step logged. Your efficiency remains suspiciously comforting.")),
+				4.0
+			)
 		save_game(true)
 
 
@@ -241,17 +248,3 @@ func _sync_world_state() -> void:
 func _restart_day() -> void:
 	get_tree().paused = false
 	get_tree().call_deferred("reload_current_scene")
-
-
-func _ai_confirmation(action_id: String) -> String:
-	var lines := {
-		"bath_stop": "Bath telemetry stable. Towels pre-warmed. Rubber duck classified.",
-		"breakfast_plate": "Service bell detected. Raccoon Man's coffee-to-crime ratio is restored.",
-		"gadget_wires": "Continuity green. No eyebrows were lost. An above-average repair.",
-		"gadget_calibrate": "Pressure curve locked. Please discourage indoor grapnel testing.",
-		"gadget_close": "Grapnel-9000 is back in circulation. The gargoyles have been warned.",
-		"suit_display": "Suit integrity at ninety-nine percent. Cape drama at one hundred and twelve.",
-		"car_load": "Roadster checklist complete. Smoke acorns are not snacks, despite the label.",
-		"cell_lock": "Containment verified. Doctor Dreadful has requested a less cheerful mop.",
-	}
-	return lines.get(action_id, "Step logged. Your efficiency remains suspiciously comforting.")
